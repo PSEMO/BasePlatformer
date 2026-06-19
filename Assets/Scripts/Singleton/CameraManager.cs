@@ -23,7 +23,7 @@ public class CameraManager : MonoBehaviour
 
     void Update()
     {
-        if (targets.Count >= 0)
+        if (targets.Count > 0)
         {
             Vector2 endPosition = Vector2.zero;
 

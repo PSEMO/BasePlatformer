@@ -36,28 +36,13 @@ public class UIManager : MonoBehaviour
         DisableAllUI();
 
         MainMenu.SetActive(true);
-        InGameMenu.SetActive(false);
     }
 
     public void SwitchToInGameMenuUI()
     {
         DisableAllUI();
 
-        MainMenu.SetActive(false);
         InGameMenu.SetActive(true);
-    }
-
-    public void PlayBtn()
-    {
-        SwitchToInGameMenuUI();
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void QuitBtn()
-    {
-        SwitchToMainMenuUI();
-        SceneManager.LoadScene(0);
     }
 
     public void SettingsBtn()
@@ -74,8 +59,40 @@ public class UIManager : MonoBehaviour
         CreditsMenu.SetActive(true);
     }
 
+    public void BackBtn()
+    {
+        if (GameManager.Instance.gameState == GameState.MainMenu)
+        {
+            SwitchToMainMenuUI();
+        }
+        else if (GameManager.Instance.gameState == GameState.Playing)
+        {
+            SwitchToInGameMenuUI();
+        }
+    }
+
+    public void PlayBtn()
+    {
+        SwitchToInGameMenuUI();
+
+        GameManager.Instance.gameState = GameState.Playing;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void QuitBtn()
+    {
+        SwitchToMainMenuUI();
+
+        GameManager.Instance.gameState = GameState.MainMenu;
+        
+        SceneManager.LoadScene(0);
+    }
+
     private void DisableAllUI()
     {
+        MainMenu.SetActive(false);
+        InGameMenu.SetActive(false);
         SettingsMenu.SetActive(false);
         CreditsMenu.SetActive(false);
     }

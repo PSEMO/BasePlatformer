@@ -21,6 +21,11 @@ public class CameraManager : MonoBehaviour
 
     private Dictionary<string, TransformAndDivisor> targets;
 
+    void Start()
+    {
+        targets = new Dictionary<string, TransformAndDivisor>();
+    }
+
     void Update()
     {
         if (targets.Count > 0)

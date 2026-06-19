@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject InGameMenu;
     [SerializeField] GameObject SettingsMenu;
     [SerializeField] GameObject CreditsMenu;
+    
+    [SerializeField] GameObject BackGround;
 
     private void Start()
     {
@@ -31,28 +33,28 @@ public class UIManager : MonoBehaviour
 
     public void SwitchToMainMenuUI()
     {
-        DisableAllUI();
+        SetAllUI();
 
         MainMenu.SetActive(true);
     }
 
     public void SwitchToInGameMenuUI()
     {
-        DisableAllUI();
+        SetAllUI();
 
         InGameMenu.SetActive(true);
     }
 
     public void SettingsBtn()
     {
-        DisableAllUI();
+        SetAllUI();
 
         SettingsMenu.SetActive(true);
     }
 
     public void CreditsBtn()
     {
-        DisableAllUI();
+        SetAllUI();
 
         CreditsMenu.SetActive(true);
     }
@@ -87,11 +89,20 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    private void DisableAllUI()
+    private void SetAllUI()
     {
         MainMenu.SetActive(false);
         InGameMenu.SetActive(false);
         SettingsMenu.SetActive(false);
         CreditsMenu.SetActive(false);
+
+        if (GameManager.Instance.gameState == GameState.MainMenu)
+        {
+            BackGround.SetActive(true);
+        }
+        else if (GameManager.Instance.gameState == GameState.Playing)
+        {
+            BackGround.SetActive(false);
+        }
     }
 }

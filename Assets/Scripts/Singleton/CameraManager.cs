@@ -19,11 +19,11 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    private Dictionary<string, TransformAndDivisor> targets;
+    private Dictionary<Transform, float> targets;
 
     void Start()
     {
-        targets = new Dictionary<string, TransformAndDivisor>();
+        targets = new Dictionary<Transform, float>();
     }
 
     void Update()
@@ -32,9 +32,9 @@ public class CameraManager : MonoBehaviour
         {
             Vector2 endPosition = Vector2.zero;
 
-            foreach (TransformAndDivisor target in targets.Values)
+            foreach (Transform target in targets.Keys)
             {
-                endPosition += target.GetDividedPos();
+                endPosition += (Vector2)(target.position / targets[target]);
             }
 
             endPosition /= targets.Count;
@@ -43,13 +43,13 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    public void AddTarget(string id, Transform transform, float divisor)
+    public void AddTarget(Transform _transform, float divisor)
     {
-        targets.Add(id, new TransformAndDivisor(transform, divisor));
+        targets.Add(_transform, divisor);
     }
 
-    public void RemoveTarget(string id)
+    public void RemoveTarget(Transform _tranform)
     {
-        targets.Remove(id);
+        targets.Remove(_tranform);
     }
 }

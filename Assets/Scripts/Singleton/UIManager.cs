@@ -61,11 +61,11 @@ public class UIManager : MonoBehaviour
 
     public void BackBtn()
     {
-        if (GameManager.Instance.gameState == GameState.MainMenu)
+        if (GameManager.Instance.currentGameState == GameState.MainMenu)
         {
             SwitchToMainMenuUI();
         }
-        else if (GameManager.Instance.gameState == GameState.Playing)
+        else if (GameManager.Instance.currentGameState == GameState.Playing)
         {
             SwitchToInGameMenuUI();
         }
@@ -75,7 +75,7 @@ public class UIManager : MonoBehaviour
     {
         SwitchToInGameMenuUI();
 
-        GameManager.Instance.gameState = GameState.Playing;
+        GameManager.Instance.currentGameState = GameState.Playing;
 
         SceneManager.LoadScene(1);
     }
@@ -84,7 +84,7 @@ public class UIManager : MonoBehaviour
     {
         SwitchToMainMenuUI();
 
-        GameManager.Instance.gameState = GameState.MainMenu;
+        GameManager.Instance.currentGameState = GameState.MainMenu;
         
         SceneManager.LoadScene(0);
     }
@@ -96,11 +96,11 @@ public class UIManager : MonoBehaviour
         SettingsMenu.SetActive(false);
         CreditsMenu.SetActive(false);
 
-        if (GameManager.Instance.gameState == GameState.MainMenu)
+        if (GameManager.Instance.currentGameState == GameState.MainMenu)
         {
             BackGround.SetActive(true);
         }
-        else if (GameManager.Instance.gameState == GameState.Playing)
+        else if (GameManager.Instance.currentGameState == GameState.Playing)
         {
             BackGround.SetActive(false);
         }

@@ -6,11 +6,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        CameraManager.instance.AddTarget("player", transform, data.camDivisor);
+        CameraManager.instance.AddTarget(transform, data.camDivisor);
     }
 
     void OnDestroy()
     {
-        CameraManager.instance.RemoveTarget("player");
+        CameraManager.instance.RemoveTarget(transform);
     }
 }

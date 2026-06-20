@@ -3,68 +3,92 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance { get; private set; }
+    public static AudioManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(this);
             return;
         }
         else
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(this);
+        }
+
+        LoadVolumes();
+    }
+
+    private const string MASTER_VOL_KEY = "AudioMaster";
+    private const string MUSIC_VOL_KEY  = "AudioMusic";
+    private const string SFX_VOL_KEY    = "AudioSFX";
+
+    private static readonly float defaultVolume = 0.75f;
+
+    private float masterVolume = defaultVolume;
+    public float MasterVolume
+    {
+        get => masterVolume;
+        set
+        {
+            masterVolume = Mathf.Clamp01(value);
+            PlayerPrefs.SetFloat(MASTER_VOL_KEY, masterVolume);
+            ApplyMusicVolume();
+            ApplySFXVolumes();
         }
     }
 
-    private List<AudioSource> audioSources;
+    private float musicVolume = defaultVolume;
+    public float MusicVolume
+    {
+        get => musicVolume;
+        set
+        {
+            musicVolume = Mathf.Clamp01(value);
+            PlayerPrefs.SetFloat(MUSIC_VOL_KEY, musicVolume);
+            ApplyMusicVolume();
+        }
+    }
+
+    private float sfxVolume = defaultVolume;
+    public float SFXVolume
+    {
+        get => sfxVolume;
+        set
+        {
+            sfxVolume = Mathf.Clamp01(value);
+            PlayerPrefs.SetFloat(SFX_VOL_KEY, sfxVolume);
+            ApplySFXVolumes();
+        }
+    }
+
+    private List<AudioSource> sfxSources;
     private AudioSource musicSource;
+    
+    private Dictionary<AudioSource, float> requestedVolumes;
 
     void Start()
     {
         musicSource = gameObject.AddComponent<AudioSource>();
 
-        audioSources = new List<AudioSource>();
-    }
-
-    private AudioSource GetAvailableSource()
-    {
-        foreach (AudioSource source in audioSources)
-        {
-            if (!source.isPlaying)
-            {
-                return source;
-            }
-        }
-
-        return null;
-    }
-
-    private AudioSource CreateSource()
-    {
-        AudioSource createdSource = gameObject.AddComponent<AudioSource>();
-
-        audioSources.Add(createdSource);
-
-        return createdSource;
+        sfxSources = new List<AudioSource>();
+        requestedVolumes = new Dictionary<AudioSource, float>();
     }
 
     public void PlaySound(AudioClip clip, float volume = 1f, float pitch = 1f, bool loop = false)
     {
-        AudioSource currentSource = GetAvailableSource();
+        AudioSource source = GetAvailableSource();
 
-        if (currentSource == null)
-        {
-            currentSource = CreateSource();
-        }
+        source.clip = clip;
+        source.pitch = pitch;
+        source.loop = loop;
 
-        currentSource.clip = clip;
-        currentSource.volume = volume;
-        currentSource.pitch = pitch;
-        currentSource.loop = loop;
-        currentSource.Play();
+        requestedVolumes[source] = volume;
+        source.volume = volume * sfxVolume * masterVolume;
+
+        source.Play();
     }
 
     public void PlayMusic(AudioClip clip, float volume = 1f)
@@ -72,14 +96,17 @@ public class AudioManager : MonoBehaviour
         if (musicSource.clip == clip && musicSource.isPlaying) return;
 
         musicSource.clip = clip;
-        musicSource.volume = volume;
         musicSource.loop = true;
+
+        requestedVolumes[musicSource] = volume;
+        musicSource.volume = volume * musicVolume * masterVolume;
+
         musicSource.Play();
     }
 
     public void StopAllSounds()
     {
-        foreach (AudioSource source in audioSources)
+        foreach (AudioSource source in sfxSources)
         {
             if (source.isPlaying)
             {
@@ -92,19 +119,64 @@ public class AudioManager : MonoBehaviour
     {
         if (musicSource != null && musicSource.isPlaying)
         {
-            return;
+            musicSource.Stop();
         }
-        
-        musicSource.Stop();
     }
 
-    public void SetMusicVolume(float volume)
+    private void LoadVolumes()
     {
-        if (musicSource != null)
+        masterVolume = PlayerPrefs.GetFloat(MASTER_VOL_KEY, defaultVolume);
+        musicVolume = PlayerPrefs.GetFloat(MUSIC_VOL_KEY, defaultVolume);
+        sfxVolume = PlayerPrefs.GetFloat(SFX_VOL_KEY, defaultVolume);
+    }
+
+    public void SaveVolumes()
+    {
+        PlayerPrefs.Save();
+    }
+
+    private AudioSource GetAvailableSource()
+    {
+        foreach (AudioSource source in sfxSources)
         {
-            return;
+            if (!source.isPlaying)
+            {
+                return source;
+            }
         }
 
-        musicSource.volume = volume;
+        return CreateSource();
+    }
+
+    private AudioSource CreateSource()
+    {
+        AudioSource createdSource = gameObject.AddComponent<AudioSource>();
+        sfxSources.Add(createdSource);
+        return createdSource;
+    }
+
+    private void ApplyMusicVolume()
+    {
+        if (musicSource == null) return;
+
+        float raw = requestedVolumes.ContainsKey(musicSource)
+            ? requestedVolumes[musicSource]
+            : 1f;
+
+        musicSource.volume = raw * musicVolume * masterVolume;
+    }
+
+    private void ApplySFXVolumes()
+    {
+        if (sfxSources == null) return;
+
+        foreach (AudioSource source in sfxSources)
+        {
+            float raw = requestedVolumes.ContainsKey(source)
+                ? requestedVolumes[source]
+                : 1f;
+
+            source.volume = raw * sfxVolume * masterVolume;
+        }
     }
 }

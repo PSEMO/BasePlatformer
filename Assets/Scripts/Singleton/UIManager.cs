@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         else

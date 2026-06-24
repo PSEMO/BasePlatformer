@@ -8,9 +8,12 @@ public class PlayerSO : ScriptableObject
 
     [Header("Movement")]
     public float speed = 8f;
+    public float sprintMultiplier = 1.2f;
+
+    [Header("Jump")]
     public float jumpForce = 14f;
     public bool variableJump = true;
-    public float sprintMultiplier = 1.2f;
+    [Range(0, 1)] public float variableJumpMult = 0;
 
     [Header("Config")]
     public float coyoteTime = 0.08f;

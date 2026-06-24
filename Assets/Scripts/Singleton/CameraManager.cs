@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         else

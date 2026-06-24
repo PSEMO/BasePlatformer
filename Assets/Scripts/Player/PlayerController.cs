@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
         if (context.canceled && data.variableJump && rb.linearVelocity.y > 0f)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocityY * data.variableJumpMult);
         }
     }
 

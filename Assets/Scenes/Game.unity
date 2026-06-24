@@ -1640,6 +1640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69091cf453e593f9e8a04a7ca1d75798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  allAudios: {fileID: 11400000, guid: 05f3175916007ce849d5fee045c8a76d, type: 2}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,6 +1979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 989160479}
   - component: {fileID: 989160478}
+  - component: {fileID: 989160480}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1997,7 +1999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc374ddda876cc25a80e3b93a21ab4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  currentGameState: 1
 --- !u!4 &989160479
 Transform:
   m_ObjectHideFlags: 0
@@ -2013,6 +2014,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &989160480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989160477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a740b23fb4294853f93ba17ba8b9eaab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetGameState
+  StateToSet: 1
 --- !u!1 &1006076511
 GameObject:
   m_ObjectHideFlags: 0

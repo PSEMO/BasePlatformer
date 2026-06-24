@@ -6,8 +6,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance { get; private set; }
 
-    [SerializeField] private List<MenuScreen> menuScreens; 
-    private Dictionary<MenuType, MenuScreen> menuDict;
+    [SerializeField] private List<Panel> menuScreens; 
+    private Dictionary<MenuType, Panel> menuDict;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        menuDict = new Dictionary<MenuType, MenuScreen>();
+        menuDict = new Dictionary<MenuType, Panel>();
 
         foreach (var menu in menuScreens)
         {
@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
 
     private void DisableAllUI()
     {
-        foreach (MenuScreen menuScreen in menuDict.Values)
+        foreach (Panel menuScreen in menuDict.Values)
         {
             menuScreen.Hide();
         }

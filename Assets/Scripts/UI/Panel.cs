@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MenuScreen : MonoBehaviour
+public class Panel : MonoBehaviour
 {
     public MenuType Type;
 

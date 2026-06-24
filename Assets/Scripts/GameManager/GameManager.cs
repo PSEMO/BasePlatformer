@@ -5,10 +5,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public static event Action<GameState> OnGameStateChanged;
-
-    public GameState currentGameState { get; private set; } = GameState.MainMenu;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,13 +17,21 @@ public class GameManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        CurrentGameState = initialGameState;
     }
+
+    public static event Action<GameState> OnGameStateChanged;
+
+    [HideInInspector] public GameState CurrentGameState { get; private set; }
+
+    [SerializeField] private GameState initialGameState = GameState.MainMenu;
 
     public void UpdateGameState(GameState newState)
     {
-        if (currentGameState != newState)
+        if (CurrentGameState != newState)
         {
-            currentGameState = newState;
+            CurrentGameState = newState;
             OnGameStateChanged?.Invoke(newState);
         }
     }

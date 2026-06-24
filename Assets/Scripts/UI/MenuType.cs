@@ -1,4 +1,4 @@
-public enum MenuType
+public enum PanelType
 {
     MainUI,
     InGameUI,

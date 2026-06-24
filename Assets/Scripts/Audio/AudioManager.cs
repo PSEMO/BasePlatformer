@@ -22,6 +22,11 @@ public class AudioManager : MonoBehaviour
         LoadVolumes();
         
         allAudios.Init();
+        
+        sourceToData = new Dictionary<AudioSource, AudioSO>();
+
+        sfxSources = new List<AudioSource>();
+        musicSource = gameObject.AddComponent<AudioSource>();
     }
 
     private const string MASTER_VOL_KEY = "AudioMaster";
@@ -73,14 +78,6 @@ public class AudioManager : MonoBehaviour
 
     private List<AudioSource> sfxSources;
     private AudioSource musicSource;
-
-    void Start()
-    {
-        sourceToData = new Dictionary<AudioSource, AudioSO>();
-
-        sfxSources = new List<AudioSource>();
-        musicSource = gameObject.AddComponent<AudioSource>();
-    }
 
     public void PlayAudio(string ID, bool isMusic = false)
     {

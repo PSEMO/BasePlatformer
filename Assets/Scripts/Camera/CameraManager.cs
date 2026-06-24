@@ -3,28 +3,25 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public static CameraManager instance { get; private set; }
+    public static CameraManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         else
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(this);
         }
+
+        targets = new Dictionary<Transform, float>();
     }
 
     private Dictionary<Transform, float> targets;
-
-    void Start()
-    {
-        targets = new Dictionary<Transform, float>();
-    }
 
     void Update()
     {

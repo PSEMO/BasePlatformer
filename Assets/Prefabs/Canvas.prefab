@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 3905286100450158622}
   - component: {fileID: 1304003743722345877}
   - component: {fileID: 2799165307578194608}
+  - component: {fileID: 3983687958309765325}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -351,6 +352,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuScreen
   Type: 0
+  fadeDuration: 0.25
+--- !u!225 &3983687958309765325
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490881972321607366}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &564335041154067819
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,6 +377,7 @@ GameObject:
   - component: {fileID: 615234877640316115}
   - component: {fileID: 6619411413182800262}
   - component: {fileID: 882768235924237354}
+  - component: {fileID: 7160744864862439392}
   m_Layer: 5
   m_Name: MainSettings
   m_TagString: Untagged
@@ -430,6 +445,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuScreen
   Type: 2
+  fadeDuration: 0.25
+--- !u!225 &7160744864862439392
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564335041154067819}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &595513312247814568
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +607,7 @@ GameObject:
   - component: {fileID: 1802367692085412067}
   - component: {fileID: 1025363591098751592}
   - component: {fileID: 4863148976856176336}
+  - component: {fileID: 3123385502819956495}
   m_Layer: 5
   m_Name: InGameSettings
   m_TagString: Untagged
@@ -647,6 +676,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuScreen
   Type: 3
+  fadeDuration: 0.25
+--- !u!225 &3123385502819956495
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949243937998645169}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &975990605728298931
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +812,7 @@ GameObject:
   - component: {fileID: 8222386205478592709}
   - component: {fileID: 567773378722861635}
   - component: {fileID: 4071901483403920496}
+  - component: {fileID: 5774657945523631340}
   m_Layer: 5
   m_Name: MainBg
   m_TagString: Untagged
@@ -847,6 +890,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuScreen
   Type: 5
+  fadeDuration: 0.25
+--- !u!225 &5774657945523631340
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159787225133125425}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1167777378916117750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1253,7 @@ GameObject:
   - component: {fileID: 5430700804531128477}
   - component: {fileID: 958534454412528491}
   - component: {fileID: 6524770374977723066}
+  - component: {fileID: 4651349241940269727}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1304,13 +1361,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4830c6b5d54d37d6b25901aaf8349a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  menuScreens:
+  panels:
+  - {fileID: 4071901483403920496}
   - {fileID: 2799165307578194608}
   - {fileID: 3565832804084969075}
   - {fileID: 882768235924237354}
   - {fileID: 4863148976856176336}
   - {fileID: 8814926880932014167}
-  - {fileID: 4071901483403920496}
+--- !u!114 &4651349241940269727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689130597422633045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83f7af5be401f395284c689af9e0f526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIController
 --- !u!1 &2548959948240345581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,6 +1953,7 @@ GameObject:
   - component: {fileID: 1407347085577279659}
   - component: {fileID: 2316464803365388858}
   - component: {fileID: 3565832804084969075}
+  - component: {fileID: 4467197205793204346}
   m_Layer: 5
   m_Name: InGameMenu
   m_TagString: Untagged
@@ -1931,6 +2001,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuScreen
   Type: 1
+  fadeDuration: 0.25
+--- !u!225 &4467197205793204346
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092201706072598167}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3155404069025270746
 GameObject:
   m_ObjectHideFlags: 0
@@ -6374,6 +6457,7 @@ GameObject:
   - component: {fileID: 1242281873400161252}
   - component: {fileID: 5321204982251659964}
   - component: {fileID: 8814926880932014167}
+  - component: {fileID: 3813979027249868007}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -6424,6 +6508,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuScreen
   Type: 4
+  fadeDuration: 0.25
+--- !u!225 &3813979027249868007
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8846109834054462233}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8987360525296652333
 GameObject:
   m_ObjectHideFlags: 0

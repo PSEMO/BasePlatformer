@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,7 +31,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        CameraManager.instance.AddTarget(transform, data.camDivisor);
+        CameraManager.Instance.AddTarget(transform, data.camDivisor);
     }
 
     void OnEnable()
@@ -49,7 +48,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     {
         inputActions.Player.RemoveCallbacks(this);
         inputActions.Dispose();
-        CameraManager.instance.RemoveTarget(transform);
+        CameraManager.Instance.RemoveTarget(transform);
     }
 
     void Update()
@@ -115,7 +114,10 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         if (isGrounded)
         {
             coyoteTimeCounter = data.coyoteTime;
-            hasJumped = false;
+            if (rb.linearVelocity.y <= 0f)
+            {
+                hasJumped = false;
+            }
         }
         else
         {

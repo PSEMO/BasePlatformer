@@ -4,41 +4,41 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance { get; private set; }
-
-    [SerializeField] private List<Panel> menuScreens; 
-    private Dictionary<MenuType, Panel> menuDict;
+    public static UIManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (instance != null && instance != this)
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
         else
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(this);
         }
-    }
 
-    private void Start()
-    {
-        menuDict = new Dictionary<MenuType, Panel>();
+        panelDict = new Dictionary<PanelType, Panel>();
 
-        foreach (var menu in menuScreens)
+        foreach (var menu in panels)
         {
-            if (menu != null && !menuDict.ContainsKey(menu.Type))
+            if (menu != null && !panelDict.ContainsKey(menu.Type))
             {
-                menu.Hide();
-                menuDict.Add(menu.Type, menu);
+                menu.HideInstant();
+                panelDict.Add(menu.Type, menu);
             }
         }
 
-        HandleGameStateChanged(GameManager.Instance.currentGameState);
-
         GameManager.OnGameStateChanged += HandleGameStateChanged;
+    }
+
+    [SerializeField] private List<Panel> panels; 
+    private Dictionary<PanelType, Panel> panelDict;
+
+    private void Start()
+    {
+        HandleGameStateChanged(GameManager.Instance.CurrentGameState);
     }
 
     private void OnDestroy()
@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
         DisableAllUI();
         SetBg();
 
-        menuDict[MenuType.MainUI].Show();
+        panelDict[PanelType.MainUI].Show();
     }
 
     public void SwitchToInGameMenuUI()
@@ -67,13 +67,21 @@ public class UIManager : MonoBehaviour
         DisableAllUI();
         SetBg();
 
-        menuDict[MenuType.InGameUI].Show();
+        panelDict[PanelType.InGameUI].Show();
+    }
+
+    public void ToggleSettingMenu()
+    {
+        if (panelDict[PanelType.MainSettings].IsOpen || panelDict[PanelType.InGameSettings].IsOpen)
+            BackBtn();
+        else
+            SettingsBtn();
     }
 
 //#region Helper
     private void DisableAllUI()
     {
-        foreach (Panel menuScreen in menuDict.Values)
+        foreach (Panel menuScreen in panelDict.Values)
         {
             menuScreen.Hide();
         }
@@ -81,8 +89,8 @@ public class UIManager : MonoBehaviour
 
     private void SetBg()
     {
-        if (GameManager.Instance.currentGameState == GameState.MainMenu)
-            menuDict[MenuType.MainBg].Show();
+        if (GameManager.Instance.CurrentGameState == GameState.MainMenu)
+            panelDict[PanelType.MainBg].Show();
     }
 //#endregion
 
@@ -107,10 +115,10 @@ public class UIManager : MonoBehaviour
         DisableAllUI();
         SetBg();
 
-        if (GameManager.Instance.currentGameState == GameState.MainMenu)
-            menuDict[MenuType.MainSettings].Show();
-        else if (GameManager.Instance.currentGameState == GameState.Playing)
-            menuDict[MenuType.InGameSettings].Show();
+        if (GameManager.Instance.CurrentGameState == GameState.MainMenu)
+            panelDict[PanelType.MainSettings].Show();
+        else if (GameManager.Instance.CurrentGameState == GameState.Playing)
+            panelDict[PanelType.InGameSettings].Show();
     }
 
     public void CreditsBtn()
@@ -118,14 +126,14 @@ public class UIManager : MonoBehaviour
         DisableAllUI();
         SetBg();
 
-        menuDict[MenuType.CreditsMenu].Show();
+        panelDict[PanelType.CreditsMenu].Show();
     }
 
     public void BackBtn()
     {
-        if (GameManager.Instance.currentGameState == GameState.MainMenu)
+        if (GameManager.Instance.CurrentGameState == GameState.MainMenu)
             SwitchToMainMenuUI();
-        else if (GameManager.Instance.currentGameState == GameState.Playing)
+        else if (GameManager.Instance.CurrentGameState == GameState.Playing)
             SwitchToInGameMenuUI();
     }
 //#endregion

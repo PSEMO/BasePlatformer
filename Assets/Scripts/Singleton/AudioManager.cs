@@ -20,6 +20,8 @@ public class AudioManager : MonoBehaviour
         }
 
         LoadVolumes();
+        
+        allAudios.Init();
     }
 
     private const string MASTER_VOL_KEY = "AudioMaster";
@@ -74,8 +76,6 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        allAudios.Init();
-
         sourceToData = new Dictionary<AudioSource, AudioSO>();
 
         sfxSources = new List<AudioSource>();

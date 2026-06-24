@@ -55,11 +55,12 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     void Update()
     {
         isGrounded = IsOnGround();
-        JumpCheckers();
     }
 
     void FixedUpdate()
     {
+        JumpCheckers();
+
         float velocityX = moveInput * data.speed * (sprintInput? data.sprintMultiplier : 1.0f);
         rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
     }

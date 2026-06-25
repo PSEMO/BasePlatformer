@@ -4,3 +4,4 @@ Make everything toggleable
 Make everything activateable
 Add Tutorial
 Kill box
+State Machine

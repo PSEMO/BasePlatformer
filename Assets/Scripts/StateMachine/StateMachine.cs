@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class StateMachine
 {
     StateNode current;
-    Dictionary<Type, StateNode> nodes = new();
-    HashSet<ITransition> anyTransition = new();
+    Dictionary<Type, StateNode> Nodes = new();
+    HashSet<ITransition> AnyTransition = new();
 
     public void Update()
     {
@@ -23,7 +23,7 @@ public class StateMachine
 
     public void SetState(IState state)
     {
-        current = nodes[state.GetType()];
+        current = Nodes[state.GetType()];
         current.State?.OnEnter();
     }
 
@@ -32,16 +32,16 @@ public class StateMachine
         if (state == current.State) return;
 
         var previousState = current.State;
-        var nextState = nodes[state.GetType()].State;
+        var nextState = Nodes[state.GetType()].State;
 
         previousState?.OnExit();
         nextState?.OnEnter();
-        current = nodes[state.GetType()];
+        current = Nodes[state.GetType()];
     }
 
     ITransition GetTransition()
     {
-        foreach (var transition in anyTransition)
+        foreach (var transition in AnyTransition)
             if (transition.Condition.Evaluate())
                 return transition;
 
@@ -59,17 +59,17 @@ public class StateMachine
 
     public void AddAnyTransition(IState to, IPredicate condition)
     {
-        anyTransition.Add(new Transition(GetOrAddNode(to).State, condition));
+        AnyTransition.Add(new Transition(GetOrAddNode(to).State, condition));
     }
 
     StateNode GetOrAddNode(IState state)
     {
-        var node = nodes.GetValueOrDefault(state.GetType());
+        var node = Nodes.GetValueOrDefault(state.GetType());
 
         if (node == null)
         {
             node = new StateNode(state);
-            nodes.Add(state.GetType(), node);
+            Nodes.Add(state.GetType(), node);
         }
 
         return node;

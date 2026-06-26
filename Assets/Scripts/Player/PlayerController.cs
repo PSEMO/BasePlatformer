@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions
 {
     [SerializeField] PlayerSO data;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     bool canDash = true;
 
     Rigidbody2D rb;
+    Animator animator;
 
     bool isGrounded = true;
     float coyoteTimeCounter = 0;
@@ -36,11 +38,13 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     {
         inputActions = new InputSystem_Actions();
         inputActions.Player.AddCallbacks(this);
+
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         CameraManager.Instance.AddTarget(transform, data.camDivisor);
 
         respawnPos = transform.position;

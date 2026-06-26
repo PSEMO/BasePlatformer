@@ -1,6 +1,3 @@
-Add Tutorial
-
-/*after refactoring the PlayerController*/
 State Machine
 Make everything toggleable
 Make everything activateable

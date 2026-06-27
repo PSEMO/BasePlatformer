@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,12 +18,21 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
     private Vector3 respawnPos;
 
+    //Inputs
     public float moveInput = 0;
     public bool upInput = false;
     public bool dashInput = false;
     public bool interactInput = false;
 
+    //Jump
     public bool isGrounded = true;
+    public float coyoteTimeCounter = 0;
+    public float jumpBufferCounter = 0;
+    public int jumpsLeft = 0;
+    public bool hasJumped = false;
+
+    //Dash
+    public bool canDash = true;
     
     void Awake()
     {
@@ -38,6 +48,8 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         CameraManager.Instance.AddTarget(transform, data.camDivisor);
 
         respawnPos = transform.position;
+
+        jumpsLeft = data.jumpCount;
     }
 
     void OnEnable()
@@ -64,6 +76,35 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     void Update()
     {
         isGrounded = IsOnGround();
+        UpdateJumpTimers();
+    }
+
+    private void UpdateJumpTimers()
+    {
+        if (isGrounded)
+        {
+            coyoteTimeCounter = data.coyoteTime;
+            if (rb.linearVelocity.y <= 0f)
+            {
+                hasJumped = false;
+                jumpsLeft = data.jumpCount;
+                canDash = true;
+            }
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+
+            if (coyoteTimeCounter <= 0f && !hasJumped && jumpsLeft == data.jumpCount)
+            {
+                jumpsLeft--;
+            }
+        }
+
+        if (jumpBufferCounter > 0f)
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
     }
 
     private bool IsOnGround()

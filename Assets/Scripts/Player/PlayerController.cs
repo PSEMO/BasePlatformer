@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     [HideInInspector] public float moveInput = 0;
     [HideInInspector] public bool upInput = false;
     [HideInInspector] public bool dashInput = false;
-    [HideInInspector] public bool interactInput = false;
 
     //Move
     [HideInInspector] public Vector3 initialScale;
@@ -146,7 +145,6 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         moveInput = 0;
         dashInput = false;
         upInput = false;
-        interactInput = false;
         
         stateMachine.SetState(new IdleState(this, animator)); 
     }
@@ -230,11 +228,12 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     {
         if (context.performed && data.ableToInteract)
         {
-            interactInput = true;
-        }
-        else if (context.canceled)
-        {
-            interactInput = false;
+            Collider2D hit = Physics2D.OverlapCircle(transform.position, data.interactionRadius, data.interactionLayer);
+
+            if (hit != null && hit.TryGetComponent(out IInteractable interactable))
+            {
+                interactable.OnInteracted();
+            }
         }
     }
 }

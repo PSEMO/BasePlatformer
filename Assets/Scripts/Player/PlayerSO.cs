@@ -29,7 +29,9 @@ public class PlayerSO : ScriptableObject
     [Header("Config")]
     public float coyoteTime = 0.08f;
     public float jumpBufferTime = 0.12f;
-    public LayerMask groundLayer;
-    public LayerMask interactionLayer;
     public float groundCheckDistance = 0.2f;
+    public LayerMask groundLayer;
+    [Space]
+    public float interactionRadius = 4f;
+    public LayerMask interactionLayer;
 }

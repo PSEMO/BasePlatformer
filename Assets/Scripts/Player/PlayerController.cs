@@ -7,31 +7,23 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
 public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions
 {
-    [SerializeField] PlayerSO data;
-    [SerializeField] List<Transform> groundChecks;
+    [SerializeField] private PlayerSO data;
+    [SerializeField] private List<Transform> groundChecks;
+
+    private InputSystem_Actions inputActions;
+
+    public Rigidbody2D rb;
+    public Animator animator;
 
     private Vector3 respawnPos;
 
-    InputSystem_Actions inputActions;
+    public float moveInput = 0;
+    public bool upInput = false;
+    public bool dashInput = false;
+    public bool interactInput = false;
 
-    float moveInput = 0;
-    int facingDirection = 1;
-    bool sprintInput = false;
-    bool downInput = false; //unused rn
-    bool interactInput = false; //unused rn
-
-    bool isDashing = false;
-    bool canDash = true;
-
-    Rigidbody2D rb;
-    Animator animator;
-
-    bool isGrounded = true;
-    float coyoteTimeCounter = 0;
-    float jumpBufferCounter = 0;
-    bool hasJumped = false;
-    int jumpsLeft;
-
+    public bool isGrounded = true;
+    
     void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -74,129 +66,6 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         isGrounded = IsOnGround();
     }
 
-    void FixedUpdate()
-    {
-        JumpCheckers();
-        
-        if (isDashing) return;
-
-        if (jumpBufferCounter > 0f && jumpsLeft > 0)
-        {
-            ExecuteJump();
-        }
-
-        float velocityX = moveInput * data.speed * (sprintInput? data.sprintMultiplier : 1.0f);
-        rb.linearVelocity = new Vector2(velocityX, rb.linearVelocity.y);
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<float>();
-        if (moveInput != 0)
-        {
-            int newFacingDirection = moveInput >= 0 ? 1 : -1;
-            if (newFacingDirection != facingDirection)
-            {
-                facingDirection = newFacingDirection;
-                Vector3 scale = transform.localScale;
-                scale.x *= -1 * scale.x;
-                transform.localScale = scale;
-            }
-        }
-    }
-
-    public void OnUp(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            jumpBufferCounter = data.jumpBufferTime;
-
-            if (jumpsLeft > 0)
-            {
-                ExecuteJump();
-            }
-        }
-
-        if (hasJumped && context.canceled && data.variableJump && rb.linearVelocity.y > 0f)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocityY * data.variableJumpMult);
-        }
-    }
-
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            sprintInput = true;
-        }
-        else if (context.canceled)
-        {
-            sprintInput = false;
-        }
-    }
-
-    public void OnDown(InputAction.CallbackContext context)
-    {
-        downInput = context.performed;
-    }
-
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        interactInput = context.performed;
-    }
-
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (context.performed && canDash)
-        {
-            StartCoroutine(DashRoutine());
-        }
-    }
-
-    private IEnumerator DashRoutine()
-    {
-        canDash = false;
-        isDashing = true;
-        
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        
-        rb.linearVelocity = new Vector2(facingDirection * data.dashForce, 0f);
-        
-        yield return new WaitForSeconds(data.dashDuration);
-        
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-    }
-
-    private void JumpCheckers()
-    {
-        if (isGrounded)
-        {
-            coyoteTimeCounter = data.coyoteTime;
-            if (rb.linearVelocity.y <= 0f)
-            {
-                hasJumped = false;
-                jumpsLeft = data.jumpCount;
-                canDash = true;
-            }
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime;
-
-            if (coyoteTimeCounter <= 0f && !hasJumped && jumpsLeft == data.jumpCount)
-            {
-                jumpsLeft--;
-            }
-        }
-
-        if (jumpBufferCounter > 0f)
-        {
-            jumpBufferCounter -= Time.deltaTime;
-        }
-    }
-
     private bool IsOnGround()
     {
         foreach (Transform check in groundChecks)
@@ -214,15 +83,6 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         return false;
     }
 
-    void ExecuteJump()
-    {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, data.jumpForce);
-        coyoteTimeCounter = 0f;
-        jumpBufferCounter = 0f;
-        hasJumped = true;
-        jumpsLeft--;
-    }
-
     private void Die()
     {
         transform.position = respawnPos;
@@ -232,5 +92,48 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     private void SetRespawnPos(Vector3 pos)
     {
         respawnPos = pos;
+    }
+
+    //***INPUTS***
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<float>();
+        Debug.Log(moveInput);
+    }
+
+    public void OnUp(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            upInput = true;
+        }
+        else if (context.canceled)
+        {
+            upInput = false;
+        }
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            dashInput = true;
+        }
+        else if (context.canceled)
+        {
+            dashInput = false;
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            interactInput = true;
+        }
+        else if (context.canceled)
+        {
+            interactInput = false;
+        }
     }
 }

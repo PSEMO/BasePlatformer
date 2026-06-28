@@ -8,10 +8,10 @@ public class KillSelf : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(killSelfAfterSeconds(secondsToDieAfter));
+        StartCoroutine(KillSelfAfterSeconds(secondsToDieAfter));
     }
 
-    IEnumerator killSelfAfterSeconds(float seconds)
+    IEnumerator KillSelfAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(secondsToDieAfter);
         Destroy(gameObject);

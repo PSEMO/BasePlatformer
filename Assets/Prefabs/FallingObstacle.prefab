@@ -178,4 +178,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9c852c80493b616b8d992f8ddf3048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KillSelf
-  secondsToDieAfter: 2
+  secondsToDieAfter: 1.2

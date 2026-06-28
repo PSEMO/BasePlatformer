@@ -28,17 +28,4 @@ public class EnableOnContact : MonoBehaviour
 
         objectToEnable.SetActive(false);
     }
-
-    private void OnDrawGizmos()
-    {
-        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
-        if (boxCollider != null)
-        {
-            Gizmos.color = new Color(0f, 1f, 1f, 0.3f);
-            Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, transform.lossyScale);
-            Gizmos.DrawCube(boxCollider.offset, boxCollider.size);
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(boxCollider.offset, boxCollider.size);
-        }
-    }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class BaseState<AnyController> : IState where AnyController : IController
+public abstract class BaseState<AnyController> : IState where AnyController : IStateMachineUser
 {
     protected readonly AnyController ctx;
     protected readonly Animator animator;

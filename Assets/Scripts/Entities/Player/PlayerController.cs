@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
-public class PlayerController : MonoBehaviour, IController, InputSystem_Actions.IPlayerActions
+public class PlayerController : MonoBehaviour, IStateMachineUser, InputSystem_Actions.IPlayerActions
 {
     public PlayerSO data;
     [SerializeField] private List<Transform> groundChecks;

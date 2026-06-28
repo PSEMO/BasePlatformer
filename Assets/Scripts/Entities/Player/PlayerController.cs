@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
-public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions
+public class PlayerController : MonoBehaviour, IController, InputSystem_Actions.IPlayerActions
 {
     public PlayerSO data;
     [SerializeField] private List<Transform> groundChecks;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Animator animator;
 
-    [HideInInspector] public StateMachine stateMachine;
+    private StateMachine stateMachine;
 
     private Vector3 respawnPos;
 
@@ -180,10 +180,10 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         var fallState = new FallState(this, animator);
         var dashState = new DashState(this, animator);
 
-        void At(BaseState from, BaseState to, Func<bool> condition) =>
+        void At(IState from, IState to, Func<bool> condition) =>
             stateMachine.AddTransition(from, to, new FuncPredicate(condition));
 
-        void Any(BaseState to, Func<bool> condition) =>
+        void Any(IState to, Func<bool> condition) =>
             stateMachine.AddAnyTransition(to, new FuncPredicate(condition));
 
         At(idleState, runState, () => Mathf.Abs(moveInput) >= 0.1f);

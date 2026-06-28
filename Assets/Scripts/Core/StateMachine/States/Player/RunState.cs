@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RunState : BaseState
+public class RunState : PlayerBaseState
 {
     public RunState(PlayerController _ctx, Animator _animator) : base(_ctx, _animator) { }
 

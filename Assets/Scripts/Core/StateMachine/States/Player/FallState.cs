@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FallState : BaseState
+public class FallState : PlayerBaseState
 {
     public FallState(PlayerController _ctx, Animator _animator) : base(_ctx, _animator) { }
 

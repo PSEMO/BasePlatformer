@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class EnableOnContract : MonoBehaviour
+public class EnableOnContact : MonoBehaviour
 {
     [Header("Object to enable")]
     [SerializeField] private GameObject objectToEnable;

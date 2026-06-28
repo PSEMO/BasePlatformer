@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DashState : BaseState
+public class DashState : PlayerBaseState
 {
     private float dashTimeLeft;
     private float originalGravity;

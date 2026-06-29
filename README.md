@@ -4,7 +4,7 @@
 
 # Base 2D Unity Platformer
 
-A robust, highly scalable, and feature-rich foundation for building 2D platformer games in Unity. Designed with clean architecture and modern development practices, this template provides a rock-solid starting point that is easy to extend and optimize.
+A highly scalable, decoupled, and performance-driven 2D platformer template for Unity. Built around a custom node-based State Machine and an Event-Driven architecture, this foundation eliminates rigid inheritance chains and tightly coupled logic. It leverages custom Object Pooling to prevent runtime garbage collection spikes, utilizes Unity's new Input System, and fully embraces ScriptableObjects for a data-driven configuration workflow.
 
 ## Features
 

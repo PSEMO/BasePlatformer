@@ -1,4 +1,2 @@
 Add animations
 improve the spawner (object pooling)
-Moving platforn
-Rotating danger

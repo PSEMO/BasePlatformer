@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public class Rotater : MonoBehaviour, IResettable
+{
+    [SerializeField] private float rotationSpeed = 90f;
+    [SerializeField] private Vector3 rotationAxis = Vector3.forward;
+
+    private Quaternion initialRotation;
+
+    private void Start()
+    {
+        initialRotation = transform.rotation;
+    }
+
+    private void Update()
+    {
+        transform.Rotate(rotationAxis, rotationSpeed * Time.deltaTime);
+    }
+
+    public void ResetObject()
+    {
+        transform.rotation = initialRotation;
+    }
+}

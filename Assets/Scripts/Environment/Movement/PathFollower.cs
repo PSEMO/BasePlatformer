@@ -1,12 +1,14 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class PathFollowerController : MonoBehaviour, IResettable
+public class PathFollower : MonoBehaviour, IResettable
 {
-    [SerializeField] private PathFollowerSO data;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float distanceToleranceSqr = 0.01f;
+
     [SerializeField] private List<Transform> waypoints;
-    [SerializeField] private List<Vector3> targetPositions;
+    
+    private List<Vector3> targetPositions;
 
     private Vector3 initialPos;
     
@@ -15,6 +17,8 @@ public class PathFollowerController : MonoBehaviour, IResettable
     void Start()
     {
         initialPos = transform.position;
+
+        targetPositions = new();
 
         foreach (Transform waypoint in waypoints)
         {
@@ -25,9 +29,9 @@ public class PathFollowerController : MonoBehaviour, IResettable
     private void Update()
     {
         Vector3 targetPos = targetPositions[currentWaypointIndex];
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, data.speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-        if (Vector3.SqrMagnitude(transform.position - targetPos) <= data.distanceToleranceSqr)
+        if (Vector3.SqrMagnitude(transform.position - targetPos) <= distanceToleranceSqr)
         {
             currentWaypointIndex = (currentWaypointIndex + 1) % targetPositions.Count;
         }

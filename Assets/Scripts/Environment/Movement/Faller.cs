@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class FallerController : MonoBehaviour, IResettable
+public class Faller : MonoBehaviour, IResettable
 {
-    [SerializeField] private FallerSO data;
+    [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] private float gravity = 9.8f;
     
     private float currentSpeed = 0f;
     private Vector3 initialPos;
@@ -14,13 +15,13 @@ public class FallerController : MonoBehaviour, IResettable
 
     private void Update()
     {
-        if (currentSpeed >= data.maxSpeed)
+        if (currentSpeed >= maxSpeed)
         {
-            transform.Translate(Vector3.down * (data.maxSpeed * Time.deltaTime));
+            transform.Translate(Vector3.down * (maxSpeed * Time.deltaTime));
         }
         else
         {
-            currentSpeed += data.gravity * Time.deltaTime;
+            currentSpeed += gravity * Time.deltaTime;
             transform.Translate(Vector3.down * (currentSpeed * Time.deltaTime));
         }
     }

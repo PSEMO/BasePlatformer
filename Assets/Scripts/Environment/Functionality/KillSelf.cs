@@ -12,7 +12,7 @@ public class KillSelf : MonoBehaviour
 
     IEnumerator KillSelfAfterSeconds(float seconds)
     {
-        yield return new WaitForSeconds(secondsToDieAfter);
+        yield return new WaitForSeconds(seconds);
 
         Instantiator.Instance.DeSpawnObject(gameObject);
     }

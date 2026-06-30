@@ -12,14 +12,12 @@ public class PathFollower : MonoBehaviour, IPoolable, IMover
     [SerializeField] private float distanceToleranceSqr = 0.01f;
 
     [SerializeField] private List<Transform> waypoints;
-    
     private List<Vector3> targetPositions;
     
     private int currentWaypointIndex = 0;
 
     private Vector3 directionalSpeed = Vector3.zero;
-
-    Vector3 targetPos = Vector3.zero;
+    private Vector3 targetPos = Vector3.zero;
 
     private Rigidbody2D rb;
 

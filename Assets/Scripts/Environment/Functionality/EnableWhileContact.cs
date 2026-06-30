@@ -1,5 +1,3 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -10,18 +8,28 @@ public class EnableWhileContact : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D _)
     {
-        objectToEnable.SetActive(true);
+        HandleEnter();
     }
     void OnCollisionEnter2D(Collision2D _)
     {
-        objectToEnable.SetActive(true);
+        HandleEnter();
     }
 
     void OnTriggerExit2D(Collider2D _)
     {
-        objectToEnable.SetActive(false);
+        HandleExit();
     }
     void OnCollisionExit2D(Collision2D _)
+    {
+        HandleExit();
+    }
+
+    void HandleEnter()
+    {
+        objectToEnable.SetActive(true);
+    }
+
+    void HandleExit()
     {
         objectToEnable.SetActive(false);
     }

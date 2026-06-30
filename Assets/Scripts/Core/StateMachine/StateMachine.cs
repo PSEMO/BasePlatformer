@@ -15,19 +15,19 @@ public class StateMachine
         if (transition != null)
             ChangeState(transition.To);
 
-        current?.State?.Update();
+        current.State.Update();
     }
 
     public void FixedUpdate()
     {
-        current?.State?.FixedUpdate();
+        current.State.FixedUpdate();
     }
 
     public void SetState(IState state)
     {
         current?.State?.OnExit();
         current = Nodes[state.GetType()];
-        current?.State?.OnEnter();
+        current.State.OnEnter();
     }
 
     private void ChangeState(IState state)
@@ -38,7 +38,7 @@ public class StateMachine
         var nextState = Nodes[state.GetType()].State;
 
         previousState?.OnExit();
-        nextState?.OnEnter();
+        nextState.OnEnter();
         current = Nodes[state.GetType()];
     }
 

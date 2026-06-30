@@ -3,7 +3,6 @@ using UnityEngine;
 
 public static class Events
 {
-    // Define your static events here
     public static event Action OnPlayerDeath;
     public static void InvokePlayerDeath() => OnPlayerDeath?.Invoke();
 

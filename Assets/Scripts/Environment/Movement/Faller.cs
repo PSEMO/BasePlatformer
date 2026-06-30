@@ -20,10 +20,6 @@ public class Faller : MonoBehaviour, IPoolable, IMover
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-    }
-
     void FixedUpdate()
     {
         if (currentSpeed >= maxSpeed)

@@ -95,7 +95,6 @@ public class UIManager : MonoBehaviour
 //#endregion
 
 //#region Buttons
-
     public void PlayBtn()
     {
         GameManager.Instance.UpdateGameState(GameState.Playing);

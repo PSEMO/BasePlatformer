@@ -14,15 +14,15 @@ public class EnableOnContact : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D _)
     {
-        OnContact();
+        HandleEnter();
     }
 
     void OnCollisionEnter2D(Collision2D _)
     {
-        OnContact();
+        HandleEnter();
     }
 
-    void OnContact()
+    void HandleEnter()
     {
         if (duration <= 0)
         {
@@ -35,7 +35,6 @@ public class EnableOnContact : MonoBehaviour
             
             EnablingRoutine = StartCoroutine(EnableObject(duration));
         }
-        
     }
 
     IEnumerator EnableObject(float duration)

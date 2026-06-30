@@ -9,5 +9,5 @@
 * different songs in different scenes.
 
 ### Functionality
-* Key rebinding.
+* Key rebinding,
 * Saving.

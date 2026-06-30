@@ -1,8 +1,5 @@
-//TODO: REWORK
-
-public enum GameState
+public enum SceneState
 {
-    MainMenu,
-    Paused,
-    Playing
+    MainMenuScene,
+    GameScene
 }

@@ -1,5 +1,3 @@
-//TODO: REWORK
-
 public enum PanelType
 {
     MainUI,
@@ -7,5 +5,6 @@ public enum PanelType
     MainSettings,
     InGameSettings,
     CreditsMenu,
-    MainBg
+    MainBg,
+    InGameUnPausingMenu
 }

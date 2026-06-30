@@ -1,10 +1,9 @@
-//TODO: REWORK
-
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoBehaviour, IStateMachineUser
 {
     public static UIManager Instance { get; private set; }
 
@@ -21,7 +20,7 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
 
-        panelDict = new Dictionary<PanelType, Panel>();
+        panelDict = new();
 
         foreach (var menu in panels)
         {
@@ -32,15 +31,55 @@ public class UIManager : MonoBehaviour
             }
         }
 
+        inputActions = new InputSystem_Actions();
+
+        InitializeStateMachine();
+        
         Events.OnGameStateChanged += HandleGameStateChanged;
     }
+
+    public StateMachine UIStateMachine { get; private set; }
+
+    public SignalPredicate SettingsSignal { get; private set; } = new SignalPredicate();
+    public SignalPredicate CreditsSignal { get; private set; } = new SignalPredicate();
+    public SignalPredicate BackSignal { get; private set; } = new SignalPredicate();
+    public SignalPredicate InputBackSignal { get; private set; } = new SignalPredicate();
+    public SignalPredicate MainMenuStateSignal { get; private set; } = new SignalPredicate();
+    public SignalPredicate InGameStateSignal { get; private set; } = new SignalPredicate();
 
     [SerializeField] private List<Panel> panels; 
     private Dictionary<PanelType, Panel> panelDict;
 
+    private InputSystem_Actions inputActions;
+
     private void Start()
     {
         HandleGameStateChanged(GameManager.Instance.CurrentGameState);
+    }
+
+    private void Update()
+    {
+        UIStateMachine.Update();
+    }
+
+    private void FixedUpdate()
+    {
+        UIStateMachine.FixedUpdate();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.Enable();
+        inputActions.UI.Back.performed += OnInputBack;
+    }
+
+    private void OnDisable()
+    {
+        if (inputActions != null)
+        {
+            inputActions.Disable();
+            inputActions.UI.Back.performed -= OnInputBack;
+        }
     }
 
     private void OnDestroy()
@@ -48,94 +87,90 @@ public class UIManager : MonoBehaviour
         Events.OnGameStateChanged -= HandleGameStateChanged;
     }
 
-    private void HandleGameStateChanged(GameState state)
+    private void InitializeStateMachine()
     {
-        if (state == GameState.MainMenu)
-            SwitchToMainMenuUI();
-        else if (state == GameState.Playing)
-            SwitchToInGameMenuUI();
+        UIStateMachine = new StateMachine();
+
+        var mainMenuUIState = new MainMenuUIState(this);
+        var inGameUIState = new InGameUIState(this);
+        var mainSettingsUIState = new MainSettingsUIState(this);
+        var inGameSettingsUIState = new InGameSettingsUIState(this);
+        var creditsUIState = new CreditsUIState(this);
+        var inGameUnPausingUIState = new InGameUnPausingUIState(this);
+
+        void At(IState from, IState to, IPredicate condition) =>
+            UIStateMachine.AddTransition(from, to, condition);
+
+        void Any(IState to, IPredicate condition) =>
+            UIStateMachine.AddAnyTransition(to, condition);
+
+        IPredicate Or(params IPredicate[] predicates) =>
+            new OrPredicate(predicates);
+
+        Any(mainMenuUIState, MainMenuStateSignal);
+        Any(inGameUIState, InGameStateSignal);
+
+        At(mainMenuUIState, mainSettingsUIState, Or(SettingsSignal, InputBackSignal));
+        At(mainMenuUIState, creditsUIState, CreditsSignal);
+        
+        At(mainSettingsUIState, mainMenuUIState, Or(BackSignal, InputBackSignal));
+        
+        At(creditsUIState, mainMenuUIState, Or(BackSignal, InputBackSignal));
+
+        At(inGameUIState, inGameSettingsUIState, Or(SettingsSignal, InputBackSignal));
+        
+        At(inGameSettingsUIState, inGameUnPausingUIState, Or(BackSignal, InputBackSignal));
+        
+        At(inGameUnPausingUIState, inGameUIState, new FuncPredicate(() => inGameUnPausingUIState.IsTimerComplete));
+        
+        // Initial state doesn't matter because of HandleGameStateChanged signal.
+        UIStateMachine.SetState(mainMenuUIState);
     }
 
-    public void SwitchToMainMenuUI()
+    private void HandleGameStateChanged(SceneState state)
     {
-        DisableAllUI();
-        SetBg();
-
-        panelDict[PanelType.MainUI].Show();
+        if (state == SceneState.MainMenuScene)
+            MainMenuStateSignal.Fire();
+        else if (state == SceneState.GameScene)
+            InGameStateSignal.Fire();
     }
 
-    public void SwitchToInGameMenuUI()
+    private void OnInputBack(InputAction.CallbackContext context)
     {
-        DisableAllUI();
-        SetBg();
-
-        panelDict[PanelType.InGameUI].Show();
+        InputBackSignal.Fire();
     }
 
-    public void ToggleSettingMenu()
+    public void BackBtn()
     {
-        if (panelDict[PanelType.MainSettings].IsOpen || panelDict[PanelType.InGameSettings].IsOpen)
-            BackBtn();
-        else
-            SettingsBtn();
+        BackSignal.Fire();
     }
 
-//#region Helper
-    private void DisableAllUI()
-    {
-        foreach (Panel menuScreen in panelDict.Values)
-        {
-            menuScreen.Hide();
-        }
-    }
-
-    private void SetBg()
-    {
-        if (GameManager.Instance.CurrentGameState == GameState.MainMenu)
-            panelDict[PanelType.MainBg].Show();
-    }
-//#endregion
-
-//#region Buttons
     public void PlayBtn()
     {
-        GameManager.Instance.TryUpdateGameState(GameState.Playing);
-
+        GameManager.Instance.TryUpdateGameState(SceneState.GameScene);
         SceneManager.LoadScene(1);
     }
 
     public void QuitBtn()
     {
-        GameManager.Instance.TryUpdateGameState(GameState.MainMenu);
-        
+        GameManager.Instance.TryUpdateGameState(SceneState.MainMenuScene);
         SceneManager.LoadScene(0);
     }
 
     public void SettingsBtn()
     {
-        DisableAllUI();
-        SetBg();
-
-        if (GameManager.Instance.CurrentGameState == GameState.MainMenu)
-            panelDict[PanelType.MainSettings].Show();
-        else if (GameManager.Instance.CurrentGameState == GameState.Playing)
-            panelDict[PanelType.InGameSettings].Show();
+        SettingsSignal.Fire();
     }
 
     public void CreditsBtn()
     {
-        DisableAllUI();
-        SetBg();
-
-        panelDict[PanelType.CreditsMenu].Show();
+        CreditsSignal.Fire();
     }
-
-    public void BackBtn()
+    
+    public Panel GetPanel(PanelType type)
     {
-        if (GameManager.Instance.CurrentGameState == GameState.MainMenu)
-            SwitchToMainMenuUI();
-        else if (GameManager.Instance.CurrentGameState == GameState.Playing)
-            SwitchToInGameMenuUI();
+        if (panelDict.TryGetValue(type, out var panel))
+            return panel;
+        return null;
     }
-//#endregion
 }

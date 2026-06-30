@@ -22,11 +22,11 @@ public class GameManager : MonoBehaviour
         CurrentGameState = initialGameState;
     }
 
-    [HideInInspector] public GameState CurrentGameState { get; private set; }
+    [HideInInspector] public SceneState CurrentGameState { get; private set; }
 
-    [SerializeField] private GameState initialGameState = GameState.MainMenu;
+    [SerializeField] private SceneState initialGameState = SceneState.MainMenuScene;
 
-    public void TryUpdateGameState(GameState newState)
+    public void TryUpdateGameState(SceneState newState)
     {
         if (CurrentGameState != newState)
         {

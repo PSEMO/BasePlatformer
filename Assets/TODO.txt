@@ -9,7 +9,5 @@
 * different songs in different scenes.
 
 ### Functionality
-* Mapped collectable collection.
-* Add pause
-* Add continue
-* Key rebinding
+* Mapped collectable collection,
+* Key rebinding.

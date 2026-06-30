@@ -9,6 +9,6 @@ public static class Events
     public static event Action<Vector3> OnCheckPointReached;
     public static void InvokeCheckPointReached(Vector3 newSpawnPos) => OnCheckPointReached?.Invoke(newSpawnPos);
 
-    public static event Action<GameState> OnGameStateChanged;
-    public static void InvokeGameStateChanged(GameState newState) => OnGameStateChanged?.Invoke(newState);
+    public static event Action<SceneState> OnGameStateChanged;
+    public static void InvokeGameStateChanged(SceneState newState) => OnGameStateChanged?.Invoke(newState);
 }

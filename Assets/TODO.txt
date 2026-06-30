@@ -12,6 +12,7 @@
 * Mapped collectable collection.
 * Add pause
 * Add continue
+* Key rebinding
 
 ### Rework
 * Re-do the whole UI logic

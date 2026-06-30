@@ -6,49 +6,64 @@
 
 A highly scalable, decoupled, and performance-driven 2D platformer template for Unity. Built around a custom node-based State Machine and an Event-Driven architecture, this foundation eliminates rigid inheritance chains and tightly coupled logic. It leverages custom Object Pooling to prevent runtime garbage collection spikes, utilizes Unity's new Input System, and fully embraces ScriptableObjects for a data-driven configuration workflow.
 
-## Features
+## Core Features & Architecture
 
-### 1. Advanced Player Controller
-The player controller includes modern, "feel-good" platforming mechanics right out of the box:
-- **Coyote Time & Jump Buffering**: Ensures inputs feel responsive and forgiving.
-- **Variable Jump Height**: Jump height scales dynamically based on how long the jump button is held.
-- **Fluid Movement States**: Built-in support for running, falling, and dashing.
-- **Moving Platforms Compatibility**: Full support for inheriting external velocities (e.g., from moving platforms) via the `IVelocityOffsettable` interface.
+### **State Machine Driven**
+The project relies on a flexible, custom-built State Machine architecture (using Nodes and Predicate-based Transitions). This is utilized heavily in two main areas:
+- **Player Logic**: Handles complex state transitions seamlessly (Idle, Run, Jump, Fall, Dash).
+- **UI Management**: Governs screen flows, ensuring accurate transitions between menus, settings, and gameplay states.
 
-### 2. Node-Based State Machine
-Say goodbye to spaghetti code! The player logic is driven by a highly modular **State Machine** (`StateMachine`, `StateNode`, `ITransition`).
-- Easily add new states (like Wall Slide, Attack, Crouch) by simply creating a new class and defining its transitions via functional predicates.
-- Enforces single-responsibility principle for character behaviors.
+### **Event-Driven & Decoupled**
+- **Centralized Events Hub**: A static `Events.cs` script delegates major game occurrences (Player Death, Checkpoints, Collectibles) via C# Actions, meaning systems don't require direct hard-coded references to one another.
+- **Custom Object Pooling**: Built-in object pooling manager (`Instantiator`) and `IPoolable` interface to prevent expensive `Instantiate` and `Destroy` operations during gameplay, used heavily for projectiles, hazards, and audio sources.
 
-### 3. High Performance Object Pooling
-Instantiation can cause severe frame drops. This project includes a custom-built **Object Pooling System** (`Instantiator`, `IPoolable`).
-- Automatically handles recycling GameObjects.
-- Re-initializes objects seamlessly using the `ResetObject()` interface method.
+### **Data-Driven Configuration**
+Game configurations are cleanly centralized into `ScriptableObjects`, making it trivial for designers to tweak parameters without touching code:
+- **PlayerSO**: Movement speed, jump counts, forces, coyote time, and jump buffering.
+- **CameraSO**: Follow speeds, smoothing, and level boundaries.
+- **AudioSO & AllAudioSOs**: Individual track properties (looping, base volumes) and group lists.
+- **CollectibleSO**: Display name and metadata for pick-ups.
+- **UISO**: General UI parameters.
 
-### 4. Data-Driven Design (Scriptable Objects)
-Code and configuration are strictly separated to make the project highly designer-friendly:
-- **PlayerSO**: Tweak speed, jump forces, layers, and input tolerances instantly without recompiling.
-- **CameraSO**: Adjust camera smoothing, max speeds, and clamping bounds.
-- **AudioSO**: Organize music and SFX easily in the inspector.
+---
 
-### 5. Decoupled Architecture & Events
-The architecture relies on an **Event-Driven approach** (`Events.cs`). 
-- Audio, UI, and Game State changes are entirely decoupled from gameplay logic.
-- A central `GameManager` and `UIManager` listen to events (like Player Death or Checkpoint Reached) to trigger menus, screen fades, and logic resets smoothly.
+## Advanced Player Controller
+The `PlayerController` uses Unity's **New Input System** alongside `Rigidbody2D` physics to deliver a tight and highly responsive platforming feel.
+- **Modern Platforming Quality of Life**: Features essential mechanics like **Coyote Time** (allowing jumps slightly after walking off a ledge) and **Jump Buffering** (queueing jumps right before hitting the ground).
+- **Dynamic Jumping**: Supports multi-jumps (e.g., double jumps) and variable jump heights (releasing the jump button early cuts vertical momentum to a given percentage).
+- **Dash Mechanic**: Suspends gravity temporarily to shoot the player forward.
 
-### 6. Dynamic Camera System
-The `CameraManager` doesn't just blindly follow a target—it supports **weighted multi-target tracking** allowing the camera to pan dynamically between the player and important points of interest, complete with smooth dampening and defined boundaries.
+---
 
-## Getting Started
-1. Open the project in Unity.
-2. Open the main scene located in `Assets/Scenes`.
-3. Check the `PlayerSO` in the `Assets/SOs` folder to tune the player controller to your liking.
-4. Press Play and enjoy the smooth movement!
+## Environment & Interactions
+The `Environment` scripts offer modular, drag-and-drop solutions for level design:
+- **Velocity Inheritance**: Interfaces like `IVelocityOffsettable` and `IMover` allow the player to seamlessly ride moving platforms, conveyor belts, or follow paths (`PathFollower`) while retaining their own local movement.
+- **Hazards & Checkpoints**: Ready-to-use `KillBox` scripts for spikes/pits, `CheckPoint` systems for respawning, and `Faller` objects for dropping hazards.
+- **Interactive Elements**: `IInteractable` allows NPCs, switches, or signs to be triggered by the player. Dynamic enablers (`EnableOnContact`, `EnableOnInteract`, `EnableWhileContact`) allow you to easily create doors, pressure plates, and levers.
+- **Spawners**: Periodic generation of objects leveraging the built-in pooling system.
 
-## Project Structure
-- **Core**: Contains the foundational systems (State Machine, Object Pooling, Game Manager, Predicates).
-- **Player**: The player controller and configuration.
-- **Audio**: Audio Manager and Scriptable Object definitions for sound effects and music.
-- **Camera**: Multi-target camera follow script and bounds settings.
-- **Environment**: Modular scripts for interactables, moving platforms, checkpoints, and hazard zones.
-- **UI**: State-driven UI manager and fading canvas panels.
+---
+
+## Camera System
+- **Multi-Target Follow**: The `CameraManager` can calculate the weighted average position of multiple targets to dynamically frame scenes.
+- **Smooth Dampening**: Employs `Vector3.SmoothDamp` for elegant trailing.
+- **Level Bounds**: Hard clamp support to ensure the camera never pans outside of the designated level boundaries.
+
+---
+
+## Audio Management
+- **Dedicated Audio Manager**: Singleton that segregates background music and sound effects.
+- **Dynamic SFX Pooling**: Automatically generates and cycles through a pool of `AudioSource` components, preventing cut-offs when multiple SFX play simultaneously.
+- **Volume Settings**: Separate sliders for Master, Music, and SFX volumes, properly calculated and permanently saved via `PlayerPrefs`.
+
+---
+
+## UI & Menus
+- **State Machine Flow**: The `UIManager` switches actively rendered `CanvasGroup` panels (Main Menu, Settings, Gameplay UI).
+- **Pause & Countdown System**: Leverages `Time.timeScale` to freeze the game, and gracefully reintroduces gameplay using unscaled time (`UnpauseCountdownUI`) to count down before restoring control.
+- **Collectible Tracking**: Updates the UI efficiently in response to the static event hub whenever items are picked up, categorizing them by group.
+
+---
+
+## Editor & Gizmos
+- Built-in Gizmo scripts (`BoxGizmos`, `CircleGizmos`) to visualize invisible level geometry like spawn points, triggers, and collider bounds directly in the Unity Scene view with custom colors and labels.

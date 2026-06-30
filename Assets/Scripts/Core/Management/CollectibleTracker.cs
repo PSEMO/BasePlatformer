@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +28,13 @@ public class CollectibleTracker : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(LateStart());
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return null;
+
         Events.InvokeCollectibleCountsUpdated(CollectedCounts, GroupData);
     }
 

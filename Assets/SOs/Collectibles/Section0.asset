@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094a662747b74def589ac350dd0fa4f3, type: 3}
-  m_Name: Music1
-  m_EditorClassIdentifier: Assembly-CSharp::AudioSO
-  ID: music
-  clip: {fileID: 8300000, guid: d296ff48ba25e47c7937195361f6e50d, type: 3}
-  volume: 1
-  loop: 1
+  m_Script: {fileID: 11500000, guid: e6f869ee5da6e918d8fa7b1348c85864, type: 3}
+  m_Name: Section0
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleSO
+  group: Section0
+  totalAmountOfThisGroup: 3
+  displayName: Shard

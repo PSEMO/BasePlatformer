@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094a662747b74def589ac350dd0fa4f3, type: 3}
-  m_Name: Click
-  m_EditorClassIdentifier: Assembly-CSharp::AudioSO
-  ID: click
-  clip: {fileID: 8300000, guid: 980c1345d61b117ca9644428b056655c, type: 3}
-  volume: 1
-  loop: 0
+  m_Script: {fileID: 11500000, guid: e6f869ee5da6e918d8fa7b1348c85864, type: 3}
+  m_Name: Section1
+  m_EditorClassIdentifier: Assembly-CSharp::CollectibleSO
+  group: Section1
+  totalAmountOfThisGroup: 1
+  displayName: Gem

@@ -9,5 +9,4 @@
 * different songs in different scenes.
 
 ### Functionality
-* Mapped collectable collection,
 * Key rebinding.

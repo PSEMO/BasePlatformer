@@ -34,8 +34,8 @@ public class UIManager : MonoBehaviour, IStateMachineUser
         inputActions = new InputSystem_Actions();
 
         InitializeStateMachine();
-        
-        Events.OnGameStateChanged += HandleGameStateChanged;
+
+        CurrentSceneState = initialSceneState;
     }
 
     public StateMachine UIStateMachine { get; private set; }
@@ -52,9 +52,12 @@ public class UIManager : MonoBehaviour, IStateMachineUser
 
     private InputSystem_Actions inputActions;
 
+    [SerializeField] private SceneState initialSceneState = SceneState.MainMenuScene;
+    public SceneState CurrentSceneState { get; private set; }
+
     private void Start()
     {
-        HandleGameStateChanged(GameManager.Instance.CurrentGameState);
+        HandleSceneStateChanged(CurrentSceneState);
     }
 
     private void Update()
@@ -80,11 +83,6 @@ public class UIManager : MonoBehaviour, IStateMachineUser
             inputActions.Disable();
             inputActions.UI.Back.performed -= OnInputBack;
         }
-    }
-
-    private void OnDestroy()
-    {
-        Events.OnGameStateChanged -= HandleGameStateChanged;
     }
 
     private void InitializeStateMachine()
@@ -127,12 +125,24 @@ public class UIManager : MonoBehaviour, IStateMachineUser
         UIStateMachine.SetState(mainMenuUIState);
     }
 
-    private void HandleGameStateChanged(SceneState state)
+    private void HandleSceneStateChanged(SceneState state)
     {
         if (state == SceneState.MainMenuScene)
             MainMenuStateSignal.Fire();
         else if (state == SceneState.GameScene)
             InGameStateSignal.Fire();
+    }
+
+    private bool TryUpdateSceneState(SceneState to)
+    {
+        if (CurrentSceneState == to)
+        {
+            return false;
+        }
+
+        CurrentSceneState = to;
+        HandleSceneStateChanged(to);
+        return true;
     }
 
     private void OnInputBack(InputAction.CallbackContext context)
@@ -147,13 +157,13 @@ public class UIManager : MonoBehaviour, IStateMachineUser
 
     public void PlayBtn()
     {
-        GameManager.Instance.TryUpdateGameState(SceneState.GameScene);
+        TryUpdateSceneState(SceneState.GameScene);
         SceneManager.LoadScene(1);
     }
 
     public void QuitBtn()
     {
-        GameManager.Instance.TryUpdateGameState(SceneState.MainMenuScene);
+        TryUpdateSceneState(SceneState.MainMenuScene);
         SceneManager.LoadScene(0);
     }
 

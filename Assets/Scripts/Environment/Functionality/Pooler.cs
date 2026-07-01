@@ -8,16 +8,19 @@ namespace PSEMO.Environment.Functionality
         [SerializeField] private string groupName;
         public string GroupName { get => groupName; }
 
-        IPoolable poolable;
+        IPoolable[] poolables;
 
         void Awake()
         {
-            poolable = GetComponent<IPoolable>();
+            poolables = GetComponents<IPoolable>();
         }
 
         public void ResetObject()
         {
-            poolable.ResetObject();
+            foreach (IPoolable poolable in poolables)
+            {
+                poolable.ResetObject();
+            }
         }
     }
 }

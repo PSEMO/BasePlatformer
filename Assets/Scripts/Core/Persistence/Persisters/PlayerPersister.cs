@@ -1,8 +1,7 @@
 using PSEMO.Player;
 using UnityEngine;
-using PSEMO.Persistence.Data;
 
-namespace PSEMO.Persistence
+namespace PSEMO.Core.Persistence
 {
     [RequireComponent(typeof(PlayerController))]
     public class PlayerPersister : Persists

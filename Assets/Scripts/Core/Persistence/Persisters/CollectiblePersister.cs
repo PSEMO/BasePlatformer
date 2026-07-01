@@ -1,8 +1,7 @@
 using UnityEngine;
 using PSEMO.Environment.Functionality.Collectible;
-using PSEMO.Persistence.Data;
 
-namespace PSEMO.Persistence
+namespace PSEMO.Core.Persistence
 {
     [RequireComponent(typeof(Collectible))]
     public class CollectiblePersister : Persists

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using PSEMO.Environment.Movement;
 
-namespace PSEMO.Environment.Functionality
+namespace PSEMO.Environment.Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class VelocityOffsetReceiver : MonoBehaviour, IVelocityOffsettable

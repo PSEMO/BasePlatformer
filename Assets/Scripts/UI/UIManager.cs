@@ -2,11 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using PSEMO.Core.Management;
+using UnityEngine.UI;
 using PSEMO.Core.Predicate;
 using PSEMO.Core.StateMachine;
-using UnityEngine.UI;
-using PSEMO.Persistence;
 
 namespace PSEMO.UI
 {
@@ -58,7 +56,7 @@ namespace PSEMO.UI
         {
             HandleSceneStateChanged(CurrentSceneState);
 
-            ContinueBtnObj.interactable = PersistenceManager.HasGameData();
+            ContinueBtnObj.interactable = Env.HasGameData();
         }
 
         private void Update()

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using PSEMO.Environment.Functionality;
 
 namespace PSEMO.Core.Management
 {
@@ -25,9 +26,9 @@ namespace PSEMO.Core.Management
 
         public void DeSpawnObject(GameObject obj)
         {
-            if (obj.TryGetComponent(out IPoolable poolable))
+            if (obj.TryGetComponent(out Pooler pooler))
             {
-                string id = poolable.GroupName;
+                string id = pooler.GroupName;
 
                 if (!pooledObjects.ContainsKey(id))
                 {
@@ -36,7 +37,7 @@ namespace PSEMO.Core.Management
 
                 obj.SetActive(false);
                 pooledObjects[id].Enqueue(obj);
-                poolable.ResetObject();
+                pooler.ResetObject();
             }
             else
             {
@@ -48,9 +49,9 @@ namespace PSEMO.Core.Management
 
         public GameObject SpawnObject(GameObject obj, Vector3 pos, Quaternion rotation, Transform parent = null)
         {
-            if (obj.TryGetComponent(out IPoolable poolable))
+            if (obj.TryGetComponent(out Pooler pooler))
             {
-                string id = poolable.GroupName;
+                string id = pooler.GroupName;
 
                 if (pooledObjects.TryGetValue(id, out Queue<GameObject> queue))
                 {

@@ -1,8 +1,7 @@
 using UnityEngine;
 using PSEMO.Environment.Movement;
-using PSEMO.Persistence.Data;
 
-namespace PSEMO.Persistence
+namespace PSEMO.Core.Persistence
 {
     [RequireComponent(typeof(PathFollower))]
     public class PathFollowerPersister : Persists

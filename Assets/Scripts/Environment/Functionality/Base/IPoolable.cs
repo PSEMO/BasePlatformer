@@ -1,9 +1,7 @@
-namespace PSEMO.Core
+namespace PSEMO.Environment.Functionality
 {
     public interface IPoolable
     {
-        public abstract string GroupName { get; set; }
-
         public abstract void ResetObject();
     }
 }

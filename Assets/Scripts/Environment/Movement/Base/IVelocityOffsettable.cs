@@ -1,6 +1,4 @@
-using PSEMO.Environment.Movement;
-
-namespace PSEMO.Environment.Functionality
+namespace PSEMO.Environment.Movement
 {
     public interface IVelocityOffsettable
     {

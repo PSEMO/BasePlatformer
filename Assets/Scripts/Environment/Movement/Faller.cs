@@ -1,15 +1,11 @@
 using UnityEngine;
-using PSEMO.Core;
+using PSEMO.Environment.Functionality;
 
 namespace PSEMO.Environment.Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Faller : MonoBehaviour, IPoolable, IMover
+    public class Faller : MonoBehaviour, IMover, IPoolable
     {
-        [field: SerializeField] public string GroupName { get; set; }
-
-        [Space]
-
         [SerializeField] private float maxSpeed = 20f;
         [SerializeField] private float gravity = 9.8f;
     
@@ -45,6 +41,7 @@ namespace PSEMO.Environment.Movement
         public void ResetObject()
         {
             currentSpeed = 0f;
+            directionalSpeed = Vector3.zero;
             rb.linearVelocity = Vector2.zero;
         }
     }

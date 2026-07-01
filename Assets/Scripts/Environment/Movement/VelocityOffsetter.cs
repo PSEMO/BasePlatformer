@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using PSEMO.Environment.Functionality;
 
 namespace PSEMO.Environment.Movement
 {

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5844224449223472299}
+  - component: {fileID: -2444744015894618627}
   - component: {fileID: 588487435366844556}
   - component: {fileID: 3215229438007053258}
   - component: {fileID: 6263657836173283300}
@@ -37,6 +38,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2444744015894618627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6464453770252932767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e755bd93abdacc69dcc04a0be0e0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSEMO.Environment.Functionality.Pooler
+  groupName: FallingObstacle
 --- !u!114 &588487435366844556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,7 +63,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47d2fce22dc160634a50808e31134216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FallerController
-  <GroupName>k__BackingField: FallingObstacle
   maxSpeed: 20
   gravity: 9.8
 --- !u!114 &3215229438007053258

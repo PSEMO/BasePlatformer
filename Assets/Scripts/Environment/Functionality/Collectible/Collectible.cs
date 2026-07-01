@@ -1,5 +1,4 @@
 using UnityEngine;
-using PSEMO.Core.Management;
 
 namespace PSEMO.Environment.Functionality.Collectible
 {

@@ -1,16 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using PSEMO.Core;
+using PSEMO.Environment.Functionality;
 
 namespace PSEMO.Environment.Movement
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PathFollower : MonoBehaviour, IPoolable, IMover
+    public class PathFollower : MonoBehaviour, IMover, IPoolable
     {
-        [field: SerializeField] public string GroupName { get; set; }
-
-        [Space]
-
         [SerializeField] private float speed = 5f;
         [SerializeField] private float distanceToleranceSqr = 0.01f;
 
@@ -24,9 +20,12 @@ namespace PSEMO.Environment.Movement
 
         private Rigidbody2D rb;
 
+        Vector3 initialPosition;
+
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+            initialPosition = transform.position;
         }
 
         void Start()
@@ -63,8 +62,11 @@ namespace PSEMO.Environment.Movement
 
         public void ResetObject()
         {
-            currentWaypointIndex = 0;
+            directionalSpeed = Vector3.zero;
             rb.linearVelocity = Vector2.zero;
+            currentWaypointIndex = 0;
+            targetPos = targetPositions[0];
+            transform.position = initialPosition;
         }
     }
 }

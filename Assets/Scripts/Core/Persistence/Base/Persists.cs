@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PSEMO.Persistence
+namespace PSEMO.Core.Persistence
 {
     public abstract class Persists : MonoBehaviour
     {

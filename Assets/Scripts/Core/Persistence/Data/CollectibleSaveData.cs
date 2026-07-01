@@ -1,6 +1,6 @@
 using System;
 
-namespace PSEMO.Persistence.Data
+namespace PSEMO.Core.Persistence
 {
     [Serializable]
     public class CollectibleSaveData

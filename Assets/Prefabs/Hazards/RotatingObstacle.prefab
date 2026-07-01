@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3215212514150857809}
+  - component: {fileID: -6326582401124643918}
   - component: {fileID: 264057261287279365}
   - component: {fileID: 5356975817450304239}
   - component: {fileID: 1876865031829596957}
@@ -35,6 +36,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-6326582401124643918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870615212703080633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e755bd93abdacc69dcc04a0be0e0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSEMO.Environment.Functionality.Pooler
+  groupName: RotatingObstacle
 --- !u!114 &264057261287279365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,7 +61,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a3d45c64b47cc4cb2c6e90c7fbd396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rotater
-  <GroupName>k__BackingField: RotatingObstacle
   rotationSpeed: 90
   rotationAxis: {x: 0, y: 0, z: 1}
 --- !u!114 &5356975817450304239

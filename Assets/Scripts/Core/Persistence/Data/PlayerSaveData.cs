@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace PSEMO.Persistence.Data
+namespace PSEMO.Core.Persistence
 {
     [Serializable]
     public class PlayerSaveData

@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6737214745213044546}
+  - component: {fileID: 4847437742652343363}
   - component: {fileID: 4449681677340886898}
   - component: {fileID: 1516034689188158805}
   - component: {fileID: 7297049894789900004}
@@ -71,6 +72,19 @@ Transform:
   - {fileID: 7815453874702169107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4847437742652343363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416181069142102259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e755bd93abdacc69dcc04a0be0e0a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSEMO.Environment.Functionality.Pooler
+  groupName: PathFollowingObstacle
 --- !u!114 &4449681677340886898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a5888ee12c1c3218e3a42c448c2fd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PathFollowerController
-  <GroupName>k__BackingField: PathFollowingObstacle
   speed: 5
   distanceToleranceSqr: 0.01
   waypoints:

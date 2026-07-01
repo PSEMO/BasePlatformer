@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using PSEMO.Core.Management;
 using PSEMO.Environment.Functionality.Collectible;
 
 namespace PSEMO.UI

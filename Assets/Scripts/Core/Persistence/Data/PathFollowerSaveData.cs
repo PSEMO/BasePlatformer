@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PSEMO.Persistence.Data
+namespace PSEMO.Core.Persistence
 {
     [System.Serializable]
     public class PathFollowerSaveData

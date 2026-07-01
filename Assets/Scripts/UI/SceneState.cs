@@ -1,4 +1,4 @@
-namespace PSEMO.Core.Management
+namespace PSEMO.UI
 {
     public enum SceneState
     {

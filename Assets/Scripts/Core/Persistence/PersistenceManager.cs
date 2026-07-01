@@ -1,22 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
-using PSEMO.Core.Management;
 using UnityEngine;
 
-namespace PSEMO.Persistence
+namespace PSEMO.Core.Persistence
 {
-    [System.Serializable]
-    public class SerializableDictionary
-    {
-        public List<string> keys = new();
-        public List<string> values = new();
-    }
-
     public class PersistenceManager : MonoBehaviour
     {
-        [Header("File Storage Config")]
-        [SerializeField] private static string fileName = "data.gameName";
-
         private List<Persists> dataPersistenceObjects;
 
         void Start() 
@@ -37,13 +26,7 @@ namespace PSEMO.Persistence
             Events.OnGameSaveDelete -= DeleteGameData;
         }
 
-        public static bool HasGameData()
-        {
-            string fullPath = Path.Combine(Application.persistentDataPath, fileName);
-            return File.Exists(fullPath);
-        }
-
-        public void LoadGame()
+        void LoadGame()
         {
             SerializableDictionary loadedDict = LoadFromFile();
 
@@ -71,7 +54,7 @@ namespace PSEMO.Persistence
 
         void DeleteGameData()
         {
-            string fullPath = Path.Combine(Application.persistentDataPath, fileName);
+            string fullPath = Path.Combine(Application.persistentDataPath, Env.FileName);
             if (File.Exists(fullPath))
             {
                 File.Delete(fullPath);
@@ -92,15 +75,15 @@ namespace PSEMO.Persistence
             SaveToFile(dictToSave);
         }
 
-        private List<Persists> FindAllDataPersistenceObjects()
+        List<Persists> FindAllDataPersistenceObjects()
         {
             IEnumerable<Persists> dataPersistenceObjects = FindObjectsByType<Persists>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             return new List<Persists>(dataPersistenceObjects);
         }
 
-        private SerializableDictionary LoadFromFile() 
+        SerializableDictionary LoadFromFile() 
         {
-            string fullPath = Path.Combine(Application.persistentDataPath, fileName);
+            string fullPath = Path.Combine(Application.persistentDataPath, Env.FileName);
             SerializableDictionary loadedData = null;
             if (File.Exists(fullPath)) 
             {
@@ -122,9 +105,9 @@ namespace PSEMO.Persistence
             return loadedData;
         }
 
-        private void SaveToFile(SerializableDictionary data) 
+        void SaveToFile(SerializableDictionary data) 
         {
-            string fullPath = Path.Combine(Application.persistentDataPath, fileName);
+            string fullPath = Path.Combine(Application.persistentDataPath, Env.FileName);
             try 
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(fullPath));

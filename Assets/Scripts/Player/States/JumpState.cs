@@ -8,7 +8,7 @@ namespace PSEMO.Player
 
         public override void OnEnter()
         {
-            //animator.Play(JumpAnimHash);
+            animator.Play(JumpAnimHash);
         
             ctx.rb.linearVelocity = new Vector2(ctx.rb.linearVelocity.x, ctx.data.jumpForce);
             ctx.jumpBufferCounter = 0f;

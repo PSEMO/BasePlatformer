@@ -8,7 +8,7 @@ namespace PSEMO.Player
 
         public override void OnEnter()
         {
-            //animator.Play(IdleAnimHash);
+            animator.Play(IdleAnimHash);
         }
 
         public override void FixedUpdate()

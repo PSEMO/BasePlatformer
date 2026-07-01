@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fb216a337c5e78659a8b85b32ec62462
+guid: 176ec3ae9bd79ae2b9d3c5c847474ae3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2331221371556533267
-    second: alienDash1_0
+      213: 7520479753176096072
+    second: alienDash0_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 2
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: alienDash1_0
+      name: alienDash0_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 138
-        height: 174
+        width: 140
+        height: 177
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3141d607c792a5020800000000000000
-      internalID: 2331221371556533267
+      spriteID: 84d14948d7c1e5860800000000000000
+      internalID: 7520479753176096072
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      alienDash1_0: 2331221371556533267
+      alienDash0_0: 7520479753176096072
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

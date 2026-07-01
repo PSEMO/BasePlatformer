@@ -1,5 +1,4 @@
 ### Apply assets:
-* character anim,
 * sfx (on jump etc.),
 * different songs in different scenes.
 

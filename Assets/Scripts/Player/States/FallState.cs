@@ -8,7 +8,7 @@ namespace PSEMO.Player
 
         public override void OnEnter()
         {
-            //animator.Play(FallAnimHash);
+            animator.Play(FallAnimHash);
 
             if(ctx.jumpsLeft == ctx.data.jumpCount)
             {

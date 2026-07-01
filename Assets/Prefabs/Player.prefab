@@ -102,9 +102,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7741476016541829853}
-  - component: {fileID: 300087426028984753}
   - component: {fileID: 2018240993954701890}
+  - component: {fileID: 4114354756184461682}
   - component: {fileID: 8742660120965922276}
+  - component: {fileID: 300087426028984753}
   - component: {fileID: 9208908686564330161}
   - component: {fileID: 6519271528329440469}
   - component: {fileID: 2444809528620775254}
@@ -133,6 +134,62 @@ Transform:
   - {fileID: 7586973253244786210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2018240993954701890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202858013134004778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d52eb5ffca04d3bb4ff634c0fccf68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  data: {fileID: 11400000, guid: 2687d7ebbf26a5006ac18742b1371c25, type: 2}
+  groundChecks:
+  - {fileID: 3361262947553298834}
+  - {fileID: 1691290031990977654}
+  - {fileID: 7586973253244786210}
+  rb: {fileID: 0}
+  animator: {fileID: 0}
+  respawnPos: {x: 0, y: 0, z: 0}
+  moveInput: 0
+  upInput: 0
+  dashInput: 0
+  initialScale: {x: 0, y: 0, z: 0}
+  facing: 1
+  isGrounded: 1
+  coyoteTimeCounter: 0
+  jumpBufferCounter: 0
+  jumpsLeft: 0
+  hasJumped: 0
+  canDash: 1
+--- !u!114 &4114354756184461682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202858013134004778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceba32ac2c1811ece864256cf58c586e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSEMO.Persistence.PlayerPersister
+  persistenceId: 15aad04b-d076-4458-9210-fab2ce8bdf5f
+--- !u!114 &8742660120965922276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9202858013134004778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8584662c1c3dd8eddb9ea7df018d8e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VelocityOffsetReceiver
 --- !u!212 &300087426028984753
 SpriteRenderer:
   serializedVersion: 2
@@ -192,48 +249,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2018240993954701890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9202858013134004778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d52eb5ffca04d3bb4ff634c0fccf68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  data: {fileID: 11400000, guid: 2687d7ebbf26a5006ac18742b1371c25, type: 2}
-  groundChecks:
-  - {fileID: 3361262947553298834}
-  - {fileID: 1691290031990977654}
-  - {fileID: 7586973253244786210}
-  rb: {fileID: 0}
-  animator: {fileID: 0}
-  moveInput: 0
-  upInput: 0
-  dashInput: 0
-  initialScale: {x: 0, y: 0, z: 0}
-  facing: 1
-  isGrounded: 1
-  coyoteTimeCounter: 0
-  jumpBufferCounter: 0
-  jumpsLeft: 0
-  hasJumped: 0
-  canDash: 1
---- !u!114 &8742660120965922276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9202858013134004778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8584662c1c3dd8eddb9ea7df018d8e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VelocityOffsetReceiver
 --- !u!50 &9208908686564330161
 Rigidbody2D:
   serializedVersion: 5

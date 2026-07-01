@@ -71,10 +71,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5683096626466162161}
+  - component: {fileID: 6407358065351369170}
+  - component: {fileID: 7412541059957034310}
   - component: {fileID: 4990176163348047429}
   - component: {fileID: 3731981733738914072}
   - component: {fileID: 7752903064717840955}
-  - component: {fileID: 6407358065351369170}
   - component: {fileID: 4494651838042493020}
   m_Layer: 7
   m_Name: MovingPlatform
@@ -92,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 4913353851761900561}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -101,6 +102,39 @@ Transform:
   - {fileID: 1711839116479352640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6407358065351369170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913353851761900561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a5888ee12c1c3218e3a42c448c2fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PathFollower
+  <ID>k__BackingField: MovingPlatform
+  speed: 5
+  distanceToleranceSqr: 0.01
+  waypoints:
+  - {fileID: 5728709783468458273}
+  - {fileID: 7800471949628566280}
+  currentWaypointIndex: 0
+  targetPos: {x: 0, y: 0, z: 0}
+--- !u!114 &7412541059957034310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913353851761900561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8d207da01d7c678b8d0e335610e1516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSEMO.Persistence.PathFollowerPersister
+  persistenceId: be49e7b4-2da9-412c-a476-ec3b2df65d4b
 --- !u!212 &4990176163348047429
 SpriteRenderer:
   serializedVersion: 2
@@ -225,24 +259,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &6407358065351369170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4913353851761900561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a5888ee12c1c3218e3a42c448c2fd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PathFollower
-  <ID>k__BackingField: MovingPlatform
-  speed: 5
-  distanceToleranceSqr: 0.01
-  waypoints:
-  - {fileID: 5728709783468458273}
-  - {fileID: 7800471949628566280}
 --- !u!50 &4494651838042493020
 Rigidbody2D:
   serializedVersion: 5

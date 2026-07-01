@@ -7,7 +7,7 @@ namespace PSEMO.Environment.Movement
     [RequireComponent(typeof(Rigidbody2D))]
     public class PathFollower : MonoBehaviour, IPoolable, IMover
     {
-        [field: SerializeField] public string ID { get; set; }
+        [field: SerializeField] public string GroupName { get; set; }
 
         [Space]
 
@@ -17,10 +17,10 @@ namespace PSEMO.Environment.Movement
         [SerializeField] private List<Transform> waypoints;
         private List<Vector3> targetPositions;
     
-        private int currentWaypointIndex = 0;
+        [HideInInspector] public int currentWaypointIndex = 0;
 
         private Vector3 directionalSpeed = Vector3.zero;
-        private Vector3 targetPos = Vector3.zero;
+        [HideInInspector] public Vector3 targetPos = Vector3.zero;
 
         private Rigidbody2D rb;
 

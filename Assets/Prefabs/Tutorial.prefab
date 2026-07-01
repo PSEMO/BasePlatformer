@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7398710879328330195}
-  - component: {fileID: 2397288640548713435}
   - component: {fileID: 4168603435134915629}
   - component: {fileID: 5142666863321382764}
+  - component: {fileID: 2397288640548713435}
   m_Layer: 9
   m_Name: Tutorial
   m_TagString: Untagged
@@ -35,6 +35,33 @@ Transform:
   - {fileID: 5995145300670869332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4168603435134915629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153684679503678686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2171d252330c3f259b7a3af93cace67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  objectToEnable: {fileID: 8572792119704959724}
+  duration: 2.5
+--- !u!114 &5142666863321382764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153684679503678686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1cea4f2834eff37fae71fbd86140e49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BoxGizmos
+  boxColor: {r: 1, g: 1, b: 0, a: 0.3}
 --- !u!61 &2397288640548713435
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81,33 +108,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4168603435134915629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4153684679503678686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2171d252330c3f259b7a3af93cace67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  objectToEnable: {fileID: 8572792119704959724}
-  duration: 2.5
---- !u!114 &5142666863321382764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4153684679503678686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1cea4f2834eff37fae71fbd86140e49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BoxGizmos
-  boxColor: {r: 1, g: 1, b: 0, a: 0.3}
 --- !u!1 &8572792119704959724
 GameObject:
   m_ObjectHideFlags: 0

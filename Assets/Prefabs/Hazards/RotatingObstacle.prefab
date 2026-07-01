@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3215212514150857809}
-  - component: {fileID: 1876865031829596957}
-  - component: {fileID: 3466698389042902327}
   - component: {fileID: 264057261287279365}
   - component: {fileID: 5356975817450304239}
+  - component: {fileID: 1876865031829596957}
+  - component: {fileID: 3466698389042902327}
   m_Layer: 9
   m_Name: RotatingObstacle
   m_TagString: Untagged
@@ -29,12 +29,39 @@ Transform:
   m_GameObject: {fileID: 7870615212703080633}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &264057261287279365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870615212703080633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a3d45c64b47cc4cb2c6e90c7fbd396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Rotater
+  <GroupName>k__BackingField: RotatingObstacle
+  rotationSpeed: 90
+  rotationAxis: {x: 0, y: 0, z: 1}
+--- !u!114 &5356975817450304239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7870615212703080633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aa4adfdd35f3b94b91eb948e3ba5445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KillBox
 --- !u!212 &1876865031829596957
 SpriteRenderer:
   serializedVersion: 2
@@ -140,30 +167,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &264057261287279365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7870615212703080633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49a3d45c64b47cc4cb2c6e90c7fbd396, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Rotater
-  <ID>k__BackingField: RotatingObstacle
-  rotationSpeed: 90
-  rotationAxis: {x: 0, y: 0, z: 1}
---- !u!114 &5356975817450304239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7870615212703080633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa4adfdd35f3b94b91eb948e3ba5445, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KillBox

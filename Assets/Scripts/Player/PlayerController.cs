@@ -23,7 +23,7 @@ namespace PSEMO.Player
 
         private StateMachine stateMachine;
 
-        private Vector3 respawnPos;
+        [HideInInspector] public Vector3 respawnPos;
 
         //Inputs
         [HideInInspector] public float moveInput = 0;

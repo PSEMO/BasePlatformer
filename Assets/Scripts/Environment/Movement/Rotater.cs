@@ -5,7 +5,7 @@ namespace PSEMO.Environment.Movement
 {
     public class Rotater : MonoBehaviour, IPoolable
     {
-        [field: SerializeField] public string ID { get; set; }
+        [field: SerializeField] public string GroupName { get; set; }
 
         [Space]
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1842267793083008393}
   - component: {fileID: 7780376921392621773}
+  - component: {fileID: 6864143466128320215}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -44,5 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d360cf1ba40ed29d87ed38dcf315217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  data: {fileID: 11400000, guid: 0cefc1294ab0e5ff0877b1990c44b550, type: 2}
+  SpawnInterval: 2
+  InitialDelay: 0
   prefabToSpawn: {fileID: 6464453770252932767, guid: d98886c4e4b437457a3d2c8a55de4dee, type: 3}
+--- !u!114 &6864143466128320215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713626933909202907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d423420514e746ff692c1567d1b5219f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSEMO.GizmosAsAComp.ShowInGizmos
+  label: Spawner
+  circleRadius: 0.15

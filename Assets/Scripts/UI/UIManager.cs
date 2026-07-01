@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 using PSEMO.Core.Management;
 using PSEMO.Core.Predicate;
 using PSEMO.Core.StateMachine;
+using UnityEngine.UI;
+using PSEMO.Persistence;
 
 namespace PSEMO.UI
 {
@@ -14,12 +16,12 @@ namespace PSEMO.UI
 
         public StateMachine UIStateMachine { get; private set; }
 
-        public SignalPredicate SettingsSignal { get; private set; } = new SignalPredicate();
-        public SignalPredicate CreditsSignal { get; private set; } = new SignalPredicate();
-        public SignalPredicate BackSignal { get; private set; } = new SignalPredicate();
-        public SignalPredicate InputBackSignal { get; private set; } = new SignalPredicate();
-        public SignalPredicate MainMenuStateSignal { get; private set; } = new SignalPredicate();
-        public SignalPredicate InGameStateSignal { get; private set; } = new SignalPredicate();
+        public SignalPredicate SettingsSignal { get; private set; } = new();
+        public SignalPredicate CreditsSignal { get; private set; } = new();
+        public SignalPredicate BackSignal { get; private set; } = new();
+        public SignalPredicate InputBackSignal { get; private set; } = new();
+        public SignalPredicate MainMenuStateSignal { get; private set; } = new();
+        public SignalPredicate InGameStateSignal { get; private set; } = new();
 
         [SerializeField] private List<Panel> panels; 
         private Dictionary<PanelType, Panel> panelDict;
@@ -28,6 +30,9 @@ namespace PSEMO.UI
 
         [SerializeField] private SceneState initialSceneState = SceneState.MainMenuScene;
         public SceneState CurrentSceneState { get; private set; }
+
+        [Space]
+        public Button ContinueBtnObj;
 
         private void Awake()
         {
@@ -52,6 +57,8 @@ namespace PSEMO.UI
         private void Start()
         {
             HandleSceneStateChanged(CurrentSceneState);
+
+            ContinueBtnObj.interactable = PersistenceManager.HasGameData();
         }
 
         private void Update()
@@ -159,8 +166,15 @@ namespace PSEMO.UI
             BackSignal.Fire();
         }
 
-        public void PlayBtn()
+        public void ContinueBtn()
         {
+            TryUpdateSceneState(SceneState.GameScene);
+            SceneManager.LoadScene(1);
+        }
+
+        public void NewGameBtn()
+        {
+            Events.InvokeGameSaveDelete();
             TryUpdateSceneState(SceneState.GameScene);
             SceneManager.LoadScene(1);
         }
@@ -169,6 +183,7 @@ namespace PSEMO.UI
         {
             TryUpdateSceneState(SceneState.MainMenuScene);
             Time.timeScale = 1;
+            Events.InvokeGameSave();
             SceneManager.LoadScene(0);
         }
 
@@ -180,6 +195,11 @@ namespace PSEMO.UI
         public void CreditsBtn()
         {
             CreditsSignal.Fire();
+        }
+
+        public void SaveBtn()
+        {
+            Events.InvokeGameSave();
         }
         //=========================
     }

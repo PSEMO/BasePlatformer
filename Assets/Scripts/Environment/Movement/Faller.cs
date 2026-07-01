@@ -6,7 +6,7 @@ namespace PSEMO.Environment.Movement
     [RequireComponent(typeof(Rigidbody2D))]
     public class Faller : MonoBehaviour, IPoolable, IMover
     {
-        [field: SerializeField] public string ID { get; set; }
+        [field: SerializeField] public string GroupName { get; set; }
 
         [Space]
 

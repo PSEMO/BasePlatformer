@@ -8,6 +8,8 @@ namespace PSEMO.Environment.Functionality.Collectible
     {
         [SerializeField] CollectibleSO data;
 
+        [HideInInspector] public bool isCollected = false;
+
         void OnTriggerEnter2D(Collider2D _)
         {
             HandleContact();
@@ -17,10 +19,11 @@ namespace PSEMO.Environment.Functionality.Collectible
             HandleContact();
         }
 
-        void HandleContact()
+        public void HandleContact()
         {
+            isCollected = true;
             Events.InvokeCollectibleCollected(data.group);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

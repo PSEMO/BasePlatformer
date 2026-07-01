@@ -27,7 +27,7 @@ namespace PSEMO.Core.Management
         {
             if (obj.TryGetComponent(out IPoolable poolable))
             {
-                string id = poolable.ID;
+                string id = poolable.GroupName;
 
                 if (!pooledObjects.ContainsKey(id))
                 {
@@ -50,7 +50,7 @@ namespace PSEMO.Core.Management
         {
             if (obj.TryGetComponent(out IPoolable poolable))
             {
-                string id = poolable.ID;
+                string id = poolable.GroupName;
 
                 if (pooledObjects.TryGetValue(id, out Queue<GameObject> queue))
                 {

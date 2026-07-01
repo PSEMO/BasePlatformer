@@ -26,11 +26,17 @@ namespace PSEMO.Core.StateMachine
             current.State.FixedUpdate();
         }
 
+        public event Action<IState, IState> OnStateChanged;
+
         public void SetState(IState state)
         {
-            current?.State?.OnExit();
+            var previousState = current?.State;
+            previousState?.OnExit(Nodes[state.GetType()].State);
+            
             current = Nodes[state.GetType()];
-            current.State.OnEnter();
+            current.State.OnEnter(previousState);
+            
+            OnStateChanged?.Invoke(previousState, current.State);
         }
 
         private void ChangeState(IState state)
@@ -40,9 +46,11 @@ namespace PSEMO.Core.StateMachine
             var previousState = current?.State;
             var nextState = Nodes[state.GetType()].State;
 
-            previousState?.OnExit();
-            nextState.OnEnter();
+            previousState?.OnExit(nextState);
+            nextState.OnEnter(previousState);
             current = Nodes[state.GetType()];
+            
+            OnStateChanged?.Invoke(previousState, nextState);
         }
 
         ITransition GetTransition()

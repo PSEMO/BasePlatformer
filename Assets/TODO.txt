@@ -1,5 +1,4 @@
 ### Apply assets:
-* sfx (on jump etc.),
 * different songs in different scenes.
 
 ### Functionality

@@ -6,6 +6,7 @@ using PSEMO.Camera;
 using PSEMO.Core.Predicate;
 using PSEMO.Core.StateMachine;
 using PSEMO.Environment.Functionality;
+using PSEMO.Audio;
 
 namespace PSEMO.Player
 {

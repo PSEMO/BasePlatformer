@@ -24,6 +24,11 @@ namespace PSEMO.Core.StateMachine
             // noop
         }
 
+        public virtual void OnEnter(IState previousState)
+        {
+            OnEnter();
+        }
+
         public virtual void Update()
         {
             // noop
@@ -37,6 +42,11 @@ namespace PSEMO.Core.StateMachine
         public virtual void OnExit()
         {
             // noop
+        }
+
+        public virtual void OnExit(IState nextState)
+        {
+            OnExit();
         }
     }
 }

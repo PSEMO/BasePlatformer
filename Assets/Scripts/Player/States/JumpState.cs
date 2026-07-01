@@ -1,3 +1,4 @@
+using PSEMO.Audio;
 using UnityEngine;
 
 namespace PSEMO.Player
@@ -9,6 +10,8 @@ namespace PSEMO.Player
         public override void OnEnter()
         {
             animator.Play(JumpAnimHash);
+            
+            AudioManager.Instance.PlayAudio("Jump");
         
             ctx.rb.linearVelocity = new Vector2(ctx.rb.linearVelocity.x, ctx.data.jumpForce);
             ctx.jumpBufferCounter = 0f;

@@ -1,3 +1,5 @@
+using PSEMO.Audio;
+using PSEMO.Core.StateMachine;
 using UnityEngine;
 
 namespace PSEMO.Player
@@ -19,6 +21,16 @@ namespace PSEMO.Player
         public override void FixedUpdate()
         {
             ctx.Run();
+        }
+
+        public override void OnExit(IState nextState)
+        {
+            if (nextState is RunState || nextState is IdleState)
+            {
+                AudioManager.Instance.PlayAudio("Fall");
+            }
+
+            base.OnExit(nextState);
         }
     }
 }

@@ -1,3 +1,4 @@
+using PSEMO.Audio;
 using UnityEngine;
 
 namespace PSEMO.Environment.Functionality.Collectible
@@ -11,15 +12,18 @@ namespace PSEMO.Environment.Functionality.Collectible
 
         void OnTriggerEnter2D(Collider2D _)
         {
-            HandleContact();
+            HandleContact(true);
         }
         void OnCollisionEnter2D(Collision2D _)
         {
-            HandleContact();
+            HandleContact(true);
         }
 
-        public void HandleContact()
+        public void HandleContact(bool PlayAudio = false)
         {
+            if (PlayAudio)
+                AudioManager.Instance.PlayAudio("Coin");
+            
             isCollected = true;
             Events.InvokeCollectibleCollected(data.group);
             gameObject.SetActive(false);

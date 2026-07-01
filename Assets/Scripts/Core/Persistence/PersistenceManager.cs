@@ -68,6 +68,14 @@ namespace PSEMO.Core.Persistence
 
             foreach (Persists dataPersistenceObj in dataPersistenceObjects)
             {
+                if (dictToSave.keys.Contains(dataPersistenceObj.persistenceId))
+                {
+                    Debug.LogWarning($"Duplicate ID found:");
+                    Debug.LogWarning($"{dataPersistenceObj.persistenceId}");
+                    Debug.LogWarning($"{dataPersistenceObj.gameObject.name}");
+                    Debug.LogWarning("------------------------------------");
+                    continue;
+                }
                 dictToSave.keys.Add(dataPersistenceObj.persistenceId);
                 dictToSave.values.Add(dataPersistenceObj.SaveData());
             }
@@ -89,12 +97,7 @@ namespace PSEMO.Core.Persistence
             {
                 try 
                 {
-                    string dataToLoad = "";
-                    using (FileStream stream = new(fullPath, FileMode.Open))
-                    {
-                        using StreamReader reader = new(stream);
-                        dataToLoad = reader.ReadToEnd();
-                    }
+                    string dataToLoad = File.ReadAllText(fullPath);
                     loadedData = JsonUtility.FromJson<SerializableDictionary>(dataToLoad);
                 }
                 catch (System.Exception e) 
@@ -112,11 +115,7 @@ namespace PSEMO.Core.Persistence
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
                 string dataToStore = JsonUtility.ToJson(data, true);
-                using (FileStream stream = new(fullPath, FileMode.Create))
-                {
-                    using StreamWriter writer = new(stream);
-                    writer.Write(dataToStore);
-                }
+                File.WriteAllText(fullPath, dataToStore);
             }
             catch (System.Exception e) 
             {

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b3f06c9da3377ef8ef1feb89c8c204, type: 3}
   m_Name: UIData
   m_EditorClassIdentifier: Assembly-CSharp::UISO
-  returningFromPauseCooldown: 1.5
+  returningFromPauseCooldown: 1

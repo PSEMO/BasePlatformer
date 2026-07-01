@@ -19,8 +19,6 @@ namespace PSEMO.Audio
                 Instance = this;
                 DontDestroyOnLoad(this);
             }
-
-            LoadVolumes();
         
             allAudios.Init();
         
@@ -28,6 +26,8 @@ namespace PSEMO.Audio
 
             sfxSources = new List<AudioSource>();
             musicSource = gameObject.AddComponent<AudioSource>();
+
+            LoadVolumes();
         }
 
         private const string MASTER_VOL_KEY = "AudioMaster";
@@ -73,6 +73,12 @@ namespace PSEMO.Audio
             }
         }
 
+        void Start()
+        {
+            ApplyMusicVolume();
+            ApplySFXVolumes();
+        }
+
         [SerializeField] private AllAudioSOs allAudios;
 
         private Dictionary<AudioSource, AudioSO> sourceToData;
@@ -100,7 +106,7 @@ namespace PSEMO.Audio
 
             source.clip = data.clip;
             source.loop = data.loop;
-            source.volume = data.volume * sfxVolume * masterVolume;
+            source.volume = (isMusic? musicVolume : sfxVolume) * data.volume * masterVolume;
 
             source.Play();
         }

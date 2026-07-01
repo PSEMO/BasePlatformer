@@ -67,3 +67,15 @@ The `Environment` scripts offer modular, drag-and-drop solutions for level desig
 
 ## Editor & Gizmos
 - Built-in Gizmo scripts (`BoxGizmos`, `CircleGizmos`) to visualize invisible level geometry like spawn points, triggers, and collider bounds directly in the Unity Scene view with custom colors and labels.
+
+---
+
+## Attributions
+
+* Sprites:
+    * https://kenney.nl/assets/platformer-pack-remastered
+* SFX
+    * https://kenney.nl/assets/impact-sounds
+* Music
+    * https://opengameart.org/content/next-to-you
+    * https://opengameart.org/content/happy-adventure-loop

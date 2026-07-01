@@ -1,12 +1,9 @@
-### Add assets:
-* character art,
-* add 2-3 sfx,
-* add 2 music (menu - ingame).
-
 ### Apply assets:
 * character anim,
 * sfx (on jump etc.),
 * different songs in different scenes.
 
 ### Functionality
-* Key rebinding.
+* Key rebinding,
+* Level selection(?),
+* UI feedback.

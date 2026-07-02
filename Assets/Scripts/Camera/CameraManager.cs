@@ -5,22 +5,21 @@ namespace PSEMO.Camera
 {
     public class CameraManager : MonoBehaviour
     {
-        public static CameraManager Instance { get; private set; }
-
         private void Awake()
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            else
-            {
-                Instance = this;
-                DontDestroyOnLoad(this);
-            }
-
             targets = new Dictionary<Transform, float>();
+        }
+
+        private void OnEnable()
+        {
+            Events.OnCameraTargetAdded += AddTarget;
+            Events.OnCameraTargetRemoved += RemoveTarget;
+        }
+
+        private void OnDisable()
+        {
+            Events.OnCameraTargetAdded -= AddTarget;
+            Events.OnCameraTargetRemoved -= RemoveTarget;
         }
 
         [SerializeField] CameraSO data;

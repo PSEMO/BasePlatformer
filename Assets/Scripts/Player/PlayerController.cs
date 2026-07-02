@@ -75,7 +75,7 @@ namespace PSEMO.Player
 
         void Start()
         {
-            CameraManager.Instance.AddTarget(transform, data.camDivisor);
+            Events.InvokeCameraTargetAdded(transform, data.camDivisor);
 
             respawnPos = transform.position;
             jumpsLeft = maxJumpCount;
@@ -100,7 +100,7 @@ namespace PSEMO.Player
         {
             inputActions.Player.RemoveCallbacks(this);
             inputActions.Dispose();
-            CameraManager.Instance.RemoveTarget(transform);
+            Events.InvokeCameraTargetRemoved(transform);
         }
 
         void Update()

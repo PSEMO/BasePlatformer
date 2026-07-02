@@ -32,6 +32,12 @@ public static class Events
             return UnityEngine.Object.Instantiate(obj, pos, rotation, parent);
     }
 
+    public static event Action<Transform, float> OnCameraTargetAdded;
+    public static void InvokeCameraTargetAdded(Transform target, float divisor) => OnCameraTargetAdded?.Invoke(target, divisor);
+
+    public static event Action<Transform> OnCameraTargetRemoved;
+    public static void InvokeCameraTargetRemoved(Transform target) => OnCameraTargetRemoved?.Invoke(target);
+
     public static event Action<GameObject> OnDeSpawnObject;
     public static void InvokeDeSpawnObject(GameObject obj)
     {

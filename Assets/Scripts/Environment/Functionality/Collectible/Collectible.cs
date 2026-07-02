@@ -1,5 +1,6 @@
 using PSEMO.Audio;
 using UnityEngine;
+using PSEMO.Events;
 
 namespace PSEMO.Environment.Functionality.Collectible
 {
@@ -25,7 +26,7 @@ namespace PSEMO.Environment.Functionality.Collectible
                 AudioManager.Instance.PlayAudio("Coin");
             
             isCollected = true;
-            Events.InvokeCollectibleCollected(data.group);
+            CollectibleEvents.InvokeCollectibleCollected(data.group);
             gameObject.SetActive(false);
         }
     }

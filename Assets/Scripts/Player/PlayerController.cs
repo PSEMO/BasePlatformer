@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using PSEMO.Camera;
 using PSEMO.Core.Predicate;
 using PSEMO.Core.StateMachine;
 using PSEMO.Environment.Functionality;
+using PSEMO.Events;
 
 namespace PSEMO.Player
 {
@@ -75,7 +75,7 @@ namespace PSEMO.Player
 
         void Start()
         {
-            Events.InvokeCameraTargetAdded(transform, data.camDivisor);
+            CameraEvents.InvokeCameraTargetAdded(transform, data.camDivisor);
 
             respawnPos = transform.position;
             jumpsLeft = maxJumpCount;
@@ -85,22 +85,22 @@ namespace PSEMO.Player
         void OnEnable()
         {
             inputActions.Player.Enable();
-            Events.OnPlayerDeath += Die;
-            Events.OnCheckPointReached += SetRespawnPos;
+            PlayerEvents.OnPlayerDeath += Die;
+            PlayerEvents.OnCheckPointReached += SetRespawnPos;
         }
 
         void OnDisable()
         {
             inputActions.Player.Disable();
-            Events.OnPlayerDeath -= Die;
-            Events.OnCheckPointReached -= SetRespawnPos;
+            PlayerEvents.OnPlayerDeath -= Die;
+            PlayerEvents.OnCheckPointReached -= SetRespawnPos;
         }
 
         void OnDestroy()
         {
             inputActions.Player.RemoveCallbacks(this);
             inputActions.Dispose();
-            Events.InvokeCameraTargetRemoved(transform);
+            CameraEvents.InvokeCameraTargetRemoved(transform);
         }
 
         void Update()

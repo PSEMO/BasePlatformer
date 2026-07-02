@@ -1,4 +1,5 @@
 using UnityEngine;
+using PSEMO.Events;
 
 namespace PSEMO.Environment.Functionality
 {
@@ -7,7 +8,7 @@ namespace PSEMO.Environment.Functionality
     {
         void OnTriggerEnter2D(Collider2D _)
         {
-            Events.InvokePlayerDeath();
+            PlayerEvents.InvokePlayerDeath();
         }
     }
 }

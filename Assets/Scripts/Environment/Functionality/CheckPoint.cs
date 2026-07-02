@@ -1,4 +1,5 @@
 using UnityEngine;
+using PSEMO.Events;
 
 namespace PSEMO.Environment.Functionality
 {
@@ -10,7 +11,7 @@ namespace PSEMO.Environment.Functionality
 
         private void OnTriggerEnter2D(Collider2D _)
         {
-            Events.InvokeCheckPointReached(SpawnPos);
+            PlayerEvents.InvokeCheckPointReached(SpawnPos);
         }
     }
 }

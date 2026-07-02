@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using PSEMO.Core.Management;
+using PSEMO.Events;
 
 namespace PSEMO.Environment.Functionality
 {
@@ -16,7 +16,7 @@ namespace PSEMO.Environment.Functionality
         IEnumerator KillSelfAfterSeconds(float seconds)
         {
             yield return new WaitForSeconds(seconds);
-            Events.InvokeDeSpawnObject(gameObject);
+            PoolingEvents.InvokeDeSpawnObject(gameObject);
         }
     }
 }

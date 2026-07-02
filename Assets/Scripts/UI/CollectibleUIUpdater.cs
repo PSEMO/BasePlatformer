@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using PSEMO.Environment.Functionality.Collectible;
+using PSEMO.Events;
 
 namespace PSEMO.UI
 {
@@ -17,12 +18,12 @@ namespace PSEMO.UI
 
         private void OnEnable()
         {
-            Events.OnCollectibleCountsUpdated += UpdateUI;
+            CollectibleEvents.OnCollectibleCountsUpdated += UpdateUI;
         }
 
         private void OnDisable()
         {
-            Events.OnCollectibleCountsUpdated -= UpdateUI;
+            CollectibleEvents.OnCollectibleCountsUpdated -= UpdateUI;
         }
 
         private void UpdateUI(Dictionary<string, int> collectedCounts, Dictionary<string, CollectibleSO> groupData)

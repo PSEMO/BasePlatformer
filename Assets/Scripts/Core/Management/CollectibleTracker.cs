@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PSEMO.Environment.Functionality.Collectible;
+using PSEMO.Events;
 
 namespace PSEMO.Core.Management
 {
@@ -38,17 +39,17 @@ namespace PSEMO.Core.Management
         {
             yield return null;
 
-            Events.InvokeCollectibleCountsUpdated(CollectedCounts, GroupData);
+            CollectibleEvents.InvokeCollectibleCountsUpdated(CollectedCounts, GroupData);
         }
 
         private void OnEnable()
         {
-            Events.OnCollectibleCollected += HandleCollectibleCollected;
+            CollectibleEvents.OnCollectibleCollected += HandleCollectibleCollected;
         }
 
         private void OnDisable()
         {
-            Events.OnCollectibleCollected -= HandleCollectibleCollected;
+            CollectibleEvents.OnCollectibleCollected -= HandleCollectibleCollected;
         }
 
         private void HandleCollectibleCollected(string group)
@@ -62,7 +63,7 @@ namespace PSEMO.Core.Management
                 CollectedCounts[group] = 1;
             }
 
-            Events.InvokeCollectibleCountsUpdated(CollectedCounts, GroupData);
+            CollectibleEvents.InvokeCollectibleCountsUpdated(CollectedCounts, GroupData);
         }
 
         public int GetCount(string group)

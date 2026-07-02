@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using PSEMO.Core.Predicate;
 using PSEMO.Core.StateMachine;
+using PSEMO.Events;
 
 namespace PSEMO.UI
 {
@@ -172,7 +173,7 @@ namespace PSEMO.UI
 
         public void NewGameBtn()
         {
-            Events.InvokeGameSaveDelete();
+            PersistenceEvents.InvokeGameSaveDelete();
             TryUpdateSceneState(SceneState.GameScene);
             SceneManager.LoadScene(1);
         }
@@ -181,7 +182,7 @@ namespace PSEMO.UI
         {
             TryUpdateSceneState(SceneState.MainMenuScene);
             Time.timeScale = 1;
-            Events.InvokeGameSave();
+            PersistenceEvents.InvokeGameSave();
             SceneManager.LoadScene(0);
         }
 
@@ -197,7 +198,7 @@ namespace PSEMO.UI
 
         public void SaveBtn()
         {
-            Events.InvokeGameSave();
+            PersistenceEvents.InvokeGameSave();
         }
         //=========================
     }

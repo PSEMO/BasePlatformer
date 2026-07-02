@@ -1,5 +1,5 @@
 using UnityEngine;
-using PSEMO.Core.Management;
+using PSEMO.Events;
 
 namespace PSEMO.Environment.Functionality
 {
@@ -34,7 +34,7 @@ namespace PSEMO.Environment.Functionality
 
         private void Spawn()
         {
-            Events.InvokeSpawnObject(prefabToSpawn, transform.position, Quaternion.identity);
+            PoolingEvents.InvokeSpawnObject(prefabToSpawn, transform.position, Quaternion.identity);
         }
     }
 }

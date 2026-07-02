@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PSEMO.Environment.Functionality;
+using PSEMO.Events;
 
 namespace PSEMO.Core.Management
 {
@@ -8,14 +9,14 @@ namespace PSEMO.Core.Management
     {
         private void OnEnable()
         {
-            Events.OnSpawnObject += SpawnObject;
-            Events.OnDeSpawnObject += DeSpawnObject;
+            PoolingEvents.OnSpawnObject += SpawnObject;
+            PoolingEvents.OnDeSpawnObject += DeSpawnObject;
         }
 
         private void OnDisable()
         {
-            Events.OnSpawnObject -= SpawnObject;
-            Events.OnDeSpawnObject -= DeSpawnObject;
+            PoolingEvents.OnSpawnObject -= SpawnObject;
+            PoolingEvents.OnDeSpawnObject -= DeSpawnObject;
         }
 
         Dictionary<string, Queue<GameObject>> pooledObjects = new();

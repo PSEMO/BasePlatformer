@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using PSEMO.Events;
 
 namespace PSEMO.Core.Persistence
 {
@@ -16,14 +17,14 @@ namespace PSEMO.Core.Persistence
 
         void OnEnable()
         {
-            Events.OnGameSave += SaveTheGame;
-            Events.OnGameSaveDelete += DeleteGameData;
+            PersistenceEvents.OnGameSave += SaveTheGame;
+            PersistenceEvents.OnGameSaveDelete += DeleteGameData;
         }
 
         void OnDisable()
         {
-            Events.OnGameSave -= SaveTheGame;
-            Events.OnGameSaveDelete -= DeleteGameData;
+            PersistenceEvents.OnGameSave -= SaveTheGame;
+            PersistenceEvents.OnGameSaveDelete -= DeleteGameData;
         }
 
         void LoadGame()

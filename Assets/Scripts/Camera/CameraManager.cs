@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using PSEMO.Events;
 
 namespace PSEMO.Camera
 {
@@ -12,14 +13,14 @@ namespace PSEMO.Camera
 
         private void OnEnable()
         {
-            Events.OnCameraTargetAdded += AddTarget;
-            Events.OnCameraTargetRemoved += RemoveTarget;
+            CameraEvents.OnCameraTargetAdded += AddTarget;
+            CameraEvents.OnCameraTargetRemoved += RemoveTarget;
         }
 
         private void OnDisable()
         {
-            Events.OnCameraTargetAdded -= AddTarget;
-            Events.OnCameraTargetRemoved -= RemoveTarget;
+            CameraEvents.OnCameraTargetAdded -= AddTarget;
+            CameraEvents.OnCameraTargetRemoved -= RemoveTarget;
         }
 
         [SerializeField] CameraSO data;

@@ -21,6 +21,11 @@ namespace PSEMO.Core.Persistence
             
             ctx.transform.position = data.playerPosition;
             ctx.respawnPos = data.playerRespawnPosition;
+            ctx.ableToRun = data.ableToRun;
+            ctx.ableToJump = data.ableToJump;
+            ctx.ableToDash = data.ableToDash;
+            ctx.ableToInteract = data.ableToInteract;
+            ctx.maxJumpCount = data.maxJumpCount;
         }
 
         public override string SaveData()
@@ -28,7 +33,12 @@ namespace PSEMO.Core.Persistence
             PlayerSaveData data = new()
             {
                 playerPosition = ctx.transform.position,
-                playerRespawnPosition = ctx.respawnPos
+                playerRespawnPosition = ctx.respawnPos,
+                ableToRun = ctx.ableToRun,
+                ableToJump = ctx.ableToJump,
+                ableToDash = ctx.ableToDash,
+                ableToInteract = ctx.ableToInteract,
+                maxJumpCount = ctx.maxJumpCount
             };
             return JsonUtility.ToJson(data);
         }

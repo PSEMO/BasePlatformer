@@ -44,11 +44,11 @@ namespace PSEMO.Player
         [HideInInspector] public bool canDash = true;
 
         //Able To
-        private bool ableToRun;
-        private bool ableToJump;
-        private bool ableToDash;
-        private bool ableToInteract;
-        private int maxJumpCount;
+        [HideInInspector] public bool ableToRun;
+        [HideInInspector] public bool ableToJump;
+        [HideInInspector] public bool ableToDash;
+        [HideInInspector] public bool ableToInteract;
+        [HideInInspector] public int maxJumpCount;
 
         public void EnableRun() => ableToRun = true;
         public void EnableJump() => ableToJump = true;

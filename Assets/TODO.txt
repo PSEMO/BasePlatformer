@@ -1,4 +1,7 @@
 ### Functionality
 * Key rebinding,
 * Level selection(?),
-* UI feedback.
+* UI feedback,
+* Environment art implementation,
+* Hazard art implementation,
+* Scene based saves.
